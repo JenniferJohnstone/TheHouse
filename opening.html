@@ -61,7 +61,7 @@
                     $('.dialogue').html("Wait...")
                     setTimeout(function() {
                         $('.girl').hide()
-                        $('.background').css("background-image", "none")
+                        $('#behind').hide()
                     }, 1000)
 
                 }
@@ -78,10 +78,7 @@
 
                 if (dialogueProgression == 8) {
                     $('.coverUp').fadeOut(3000)
-                    $('#lights').fadeOut(3000)
-                    $('.dialogue').fadeOut(3000)
-                    $('.reminder').fadeOut(3000)
-                    $('.background').css("background-image", "none")
+                    $('#lights, .dialogue, .reminder, #behind').fadeOut(3000)
                     setTimeout(function() {
                         $('.transition').fadeIn(1000)
                         setTimeout(function() {
@@ -90,19 +87,19 @@
                                 document.getElementById('backgroundMusic').pause()
                                 $('.transition3').fadeIn(6000)
                                 $('#forever').delay(3000).css("fontWeight", "bold").fadeIn(8000).animate({
-                                    letterSpacing: '100px', 
-                                    left: '25%', 
+                                    letterSpacing: '100px',
+                                    left: '0%',
                                     fontSize: '100px'
                                 }, 9000)
                                 $('.transition, .transition2, .transition3').fadeOut(5000)
-                                setTimeout(function(){
+                                setTimeout(function() {
                                     window.location = 'phonecall.html'
                                 }, 16000)
                             }, 2000)
                         }, 2000)
 
                     }, 3000)
-                    
+
                 }
 
 
@@ -130,10 +127,13 @@
     </audio>
 
 
-    <div id="lights"></div>
-
-
     <div class="background">
+        
+        <img id="behind" src="images/viewFromBedroomWindow.png" />
+
+
+        <div id="lights"></div>
+
 
         <img class="coverUp" src="images/outTheWindow.png" />
 
@@ -141,7 +141,8 @@
 
         <p class="transition2"> I saw something weird</p>
 
-        <p class="transition3">if I only knew how it would change my life</p> <p id="forever">forever</p>
+        <p class="transition3">if I only knew how it would change my life</p>
+        <p id="forever">forever</p>
 
 
         <div class="dialogueBox">
@@ -154,11 +155,15 @@
         </div>
 
         <img src="images/silhouette%20girl.png" class="girl" />
+        
+            <img class="ambulance" src="images/ambulance.jpg.png" />
+
 
 
     </div>
 
-    <img class="ambulance" src="images/ambulance.jpg" />
+
+
 
 
 

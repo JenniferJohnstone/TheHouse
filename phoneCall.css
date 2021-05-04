@@ -11,10 +11,106 @@ body {
     border: 1px solid black;
     margin-left: auto; 
     margin-right: auto;
-    background-color: white;
+    background-color: black;
+}
+
+.clock{
+    width:800px;
+    height: auto;
+    position: absolute;
+    left: 200px;
+    z-index: 1;
+    display: inline;
 }
 
 h1{
-    color: black;
-    margin-top: 20%;
+    position: absolute;
+    color: red;
+    z-index: 2;
+    left: 370px;
+    font-size: 190px;
+    letter-spacing: 30px;
+    top: 120px;
 }
+
+.bedroom{
+    width: 1200px;
+    height: 650px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.dialogue, .reminder{
+    color: black;
+    display: none;
+    font-size: 24px;
+}
+
+.reminder{
+    font-style: italic;
+    font-size: 14px;
+}
+
+.dialogueBox {
+    border-color: white;
+    border-width: 1px;
+    width: 800px;
+    background: rgba(117, 117, 117, 0.7) /* grey background with 30% opacity */;
+    position: absolute;
+    top: 500px;
+    left: 220px;
+    z-index: 6;
+}
+
+.window {
+    position: absolute; 
+    top: 0; 
+    left: 0;
+    z-index: 4;
+    width: 1200px;
+    height: 650px;
+    display: none;
+}
+
+.curtain1, .curtain2 {
+    position: absolute;
+    width: 500px;
+    height: 700px;
+    z-index: 5;
+    top: 50px;
+    display: none;
+}
+
+.curtain2 {
+    transform: scaleX(-1);
+    left: 170px;
+}
+
+.rod {
+    position: absolute;
+    z-index: 4;
+    height: 40px;
+    top: 71px; 
+    left: 200px;
+    width: 900px;
+    display: none;
+}
+
+.theHouse {
+    position: absolute; 
+    height: 500px; 
+    width: 800px;
+    top: 150px; 
+    left: 100px;
+    display: none;
+    z-index: 3;
+}
+
+.number {
+    position: absolute;
+    z-index: 5;
+}
+
+
