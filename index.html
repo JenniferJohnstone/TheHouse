@@ -1,0 +1,90 @@
+<html>
+
+    <head>
+
+    <link href="index.css" rel="stylesheet">
+    <script src="jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+
+
+            document.getElementById('audio').play()
+
+            setTimeout(function() {
+                document.getElementById('music').play();
+            }, 4000)
+
+
+            $('h1').delay(1000).fadeIn(3000)
+
+
+            setTimeout(function() {
+
+                console.log('its running now');
+                setInterval(function() {
+                    girl()
+                }, 3000);
+
+            }, 1000)
+
+            $('button').on('click', function() {
+                console.log('click')
+                $('body').fadeOut(4000)
+
+                var music = document.getElementById('music')
+
+                setInterval(function() {
+                    if (music.volume >= 0) {
+                        music.volume -= 0.1;
+                    }
+                }, 500)
+                            
+                window.location = 'opening.html';
+            })
+
+
+
+            function girl() {
+                $('.girl').delay(3000).fadeIn(2000).delay(1500).fadeOut(1000)
+            }
+
+
+        })
+    </script>
+</head>
+
+<body>
+
+    <audio id="audio">
+        <source src="/sound/Horror%20Ghostly%20Breath%20Sound%20Royalty%20Free%20Sound%20Effects.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="music">
+        <source src="/sound/The%20Haunting%20-%20Creepy%20Haunted%20House%20Music.mp3" type="audio/mpeg">
+    </audio>
+
+
+    <div class="background">
+
+        <h1 style="left: 300px; top: 0;">T</h1>
+        <h1 style="left: 380px; top: 0;">he</h1>
+        <h1 style="left: 540px; top: 10px;">H</h1>
+        <h1 style="left: 600px; top: 20;">ou</h1>
+        <h1 style="left: 720px; top: 10px;">se</h1>
+        <img class="window" src="images/window2.png" />
+
+        <div class="backOfWindow">
+        </div>
+
+        <button>Start Game</button>
+
+        <img class="girl" src="images/silhouette%20girl.png" />
+
+
+    </div>
+
+
+
+
+</body></html>

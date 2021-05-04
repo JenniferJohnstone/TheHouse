@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+body {
+    text-align: center;
+    background-color: black;
+}
+
+
+.background {
+    position: relative; 
+    width: 1000px;
+    height: 650px;
+    border: 1px solid black;
+    margin-left: auto; 
+    margin-right: auto;
+    background-image: url(images/old%20house%20wall.jpg);
+}
+
+.window {
+    width: 650px;
+    position: absolute; 
+    z-index: 2;
+    left: 200px;
+    height: 600px;
+
+}
+
+.girl {
+    position: absolute; 
+    width: 400px;
+    z-index: 1;
+    bottom: 65px;
+    right: 120px;
+    display: none;
+}
+
+.backOfWindow {
+    width: 630px;
+    height: 525px;
+    position: absolute; 
+    z-index: 0;
+    left: 200px;
+    top: 30px;
+    background-image: url(images/bedroom.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation: flickering 3s infinite;
+    animation-direction: alternate;
+    animation-delay: 3s;
+    animation-timing-function: ease-in-out;
+    filter: brightness(10%);
+
+}
+
+button {
+    z-index: 3;
+    position: absolute;
+    top: 340px;
+    left: 455px;
+    font-size: 25px;
+}
+
+h1 {
+    z-index: 2;
+    position: absolute;
+    left: 420px;
+    top: 100px;
+    color: darkred;
+    display: none;
+    letter-spacing: 1px;
+    font-size: 100px;
+    font-family: 'Permanent Marker', cursive;
+}
+
+/*Light flickering */
+
+
+@keyframes flickering {
+    from {filter : brightness(10%)}
+    40% {filter: brightness(80%)}
+    80% {filter: brightness(20%)}
+    to {filter: brightness(0%)}
+}

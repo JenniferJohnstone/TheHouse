@@ -1,0 +1,110 @@
+body {
+    text-align: center;
+    background-color: black;
+}
+
+
+.background {
+    position: relative; 
+    width: 1200px;
+    height: 650px;
+    border: 1px solid black;
+    margin-left: auto; 
+    margin-right: auto;
+    background-image: url(images/viewFromBedroomWindow.png);
+    display: none;
+    z-index: 2;
+}
+
+
+#lights {
+    position: absolute; 
+    width: 500px; 
+    height: 520px; 
+    left: 250; 
+    top: 140; 
+    z-index: 1;
+    display: none;
+    background-image: url(images/creepy%20house.jpg);
+    background-size: cover;
+}
+
+.dialogue, .reminder{
+    color: white;
+    display: none;
+    font-size: 24px;
+}
+
+.reminder{
+    font-style: italic;
+    font-size: 14px;
+}
+
+.dialogueBox {
+    border-color: white;
+    border-width: 1px;
+    width: 800px;
+    background: rgba(117, 117, 117, 0.5) /* grey background with 30% opacity */;
+    position: absolute;
+    top: 500px;
+    left: 220px;
+    z-index: 4;
+}
+
+.ambulance {
+    z-index: 1;
+    position: absolute;
+    left: 800px;
+    top: 460px;
+    width: 200px;
+    display: none;
+    transform: scaleX(-1);
+}
+
+.coverUp {
+    display: none;
+    width: 1200px;
+    height: 650px;
+    position: absolute;
+    z-index: 3;
+    left: 0;
+}
+
+.girl {
+/*    display: none;*/
+    width: 56px;
+    height: 100px;
+    position: absolute;
+    z-index: 1;
+    left: 874px; 
+    top: 300px;
+    display: none;
+}
+
+
+.transition, .transition2,  .transition3, #forever{
+    display: none;
+    color: white;
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    font-size: 40px;
+    z-index: 5;
+}
+
+.transition2 {
+    top: 30%;
+    left: 55%;
+}
+
+.transition3  {
+    top: 50%;
+    color: red;
+    left: 5%;
+}
+
+#forever {
+    left: 40%;
+    top: 60%;
+    color: red;
+}

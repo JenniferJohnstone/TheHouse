@@ -1,0 +1,165 @@
+<html>
+
+<head>
+
+    <link href="opening.css" rel="stylesheet">
+    <script src="jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            var dialogueProgression = 0;
+
+            $('.background').delay(1000).fadeIn(5000)
+            $('#lights').delay(3000).fadeIn(1000)
+
+            document.getElementById('ambulance').play()
+            document.getElementById('backgroundMusic').play()
+            document.getElementById('backgroundMusic').volume = 0.1;
+
+
+            setTimeout(function() {
+                $('.ambulance').show().animate({
+                    left: "0px",
+                }, 1000);
+                setTimeout(function() {
+                    $('.ambulance').hide()
+                }, 800)
+
+            }, 4900)
+
+            setTimeout(function() {
+                $('.dialogue').html('An ambulance?')
+                $('.dialogue').show()
+                $('.reminder').show()
+            }, 7000)
+
+
+
+            $('.dialogueBox').click(function() {
+                dialogueProgression++;
+                console.log(dialogueProgression)
+                if (dialogueProgression == 1) {
+                    $('.dialogue').html("Looks like it was at that old lady's house next door")
+                }
+                if (dialogueProgression == 2) {
+                    $('.dialogue').html("I hope she's alright")
+                }
+
+
+                if (dialogueProgression == 3) {
+                    $('.dialogue').html("She's been living by herself for years")
+                }
+
+                if (dialogueProgression == 4) {
+                    $('.dialogue').html("Don't think she has any family left.")
+                }
+                if (dialogueProgression == 5) {
+                    $('.coverUp').fadeIn(1000)
+                    $('.dialogueBox').fadeIn(1000)
+                    $('.girl').fadeIn(1000)
+                    $('.dialogue').html("Wait...")
+                    setTimeout(function() {
+                        $('.girl').hide()
+                        $('.background').css("background-image", "none")
+                    }, 1000)
+
+                }
+
+                if (dialogueProgression == 6) {
+                    $('.dialogue').html("Who was that?")
+                }
+
+                if (dialogueProgression == 7) {
+                    $('.dialogue').html("I must be tired, time to get back to sleep.")
+                    document.getElementById('creepyMusic').play()
+
+                }
+
+                if (dialogueProgression == 8) {
+                    $('.coverUp').fadeOut(3000)
+                    $('#lights').fadeOut(3000)
+                    $('.dialogue').fadeOut(3000)
+                    $('.reminder').fadeOut(3000)
+                    $('.background').css("background-image", "none")
+                    setTimeout(function() {
+                        $('.transition').fadeIn(1000)
+                        setTimeout(function() {
+                            $('.transition2').fadeIn(1000)
+                            setTimeout(function() {
+                                document.getElementById('backgroundMusic').pause()
+                                $('.transition3').fadeIn(6000)
+                                $('#forever').delay(3000).css("fontWeight", "bold").fadeIn(8000).animate({
+                                    letterSpacing: '100px', 
+                                    left: '25%', 
+                                    fontSize: '100px'
+                                }, 9000)
+                                $('.transition, .transition2, .transition3').fadeOut(5000)
+                                setTimeout(function(){
+                                    window.location = 'phonecall.html'
+                                }, 16000)
+                            }, 2000)
+                        }, 2000)
+
+                    }, 3000)
+                    
+                }
+
+
+            });
+
+
+        });
+    </script>
+
+
+</head>
+
+<body>
+
+    <audio id="ambulance">
+        <source src="sound/ambulance.mp3">
+    </audio>
+
+    <audio id="backgroundMusic">
+        <source src="sound/Plastic%20Patina%20-%20Ghosts%20With%20Heartbeats%20%5BOfficial%5D.mp3">
+    </audio>
+
+    <audio id="creepyMusic">
+        <source src="sound/drawnoutSpookySound.mp3">
+    </audio>
+
+
+    <div id="lights"></div>
+
+
+    <div class="background">
+
+        <img class="coverUp" src="images/outTheWindow.png" />
+
+        <p class="transition">The next day</p>
+
+        <p class="transition2"> I saw something weird</p>
+
+        <p class="transition3">if I only knew how it would change my life</p> <p id="forever">forever</p>
+
+
+        <div class="dialogueBox">
+
+            <p class="dialogue"></p>
+
+            <p class="reminder">Click to continue</p>
+
+
+        </div>
+
+        <img src="images/silhouette%20girl.png" class="girl" />
+
+
+    </div>
+
+    <img class="ambulance" src="images/ambulance.jpg" />
+
+
+
+</body></html>
