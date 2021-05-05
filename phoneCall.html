@@ -1,108 +1,168 @@
 <html>
-
-<head>
-
-    <link href="phoneCall.css" rel="stylesheet">
+  <head>
+    <link href="phoneCall.css" rel="stylesheet" />
     <script src="jquery-3.6.0.min.js"></script>
 
     <script>
         $(document).ready(function() {
-
             var dialogueProgression = 0;
             var curtain1 = false;
             var curtain2 = false;
 
-
-            $('.time').html('6:59')
+            $(".time").html("6:59");
 
             setTimeout(function() {
-                $('.time').html('7:00')
-                document.getElementById('alarm').play()
-            }, 1000)
+                $(".time").html("7:00");
+                document.getElementById("alarm").play();
+            }, 1000);
 
-            $('.clock, .time').click(function() {
-                document.getElementById('alarm').pause()
-                document.getElementById('button').play()
-                document.getElementById('backgroundMusic').play()
-                $('.time').fadeOut(1000)
-                $('.clock').fadeOut(1000)
-                $('.dialogue').fadeIn(1000).html('Oh yes another beautiful day!')
+            $(".clock, .time").click(function() {
+                document.getElementById("alarm").pause();
+                document.getElementById("button").play();
+                document.getElementById("backgroundMusic").play();
+                $(".time").fadeOut(1000);
+                $(".clock").fadeOut(1000);
+                $(".dialogue").fadeIn(1000).html("Oh yes another beautiful day!");
+            });
 
-            })
-
-            $('.dialogueBox').click(function() {
-                dialogueProgression++
+            $(".dialogueBox").click(function() {
+                dialogueProgression++;
 
                 if (dialogueProgression == 1) {
-                    $('.dialogue').html('Time to open the curtains and let the sun in!')
+                    $(".dialogue").html(
+                        "Time to open the curtains and let the sun in!"
+                    );
                 }
 
                 if (dialogueProgression == 2) {
-                    $('.window, .curtain1, .curtain2, .rod, .reminder').fadeIn()
-                    $('.bedroom').fadeOut()
-                    $('.reminder').html('click the curtains to open them')
-
+                    $(".window, .curtain1, .curtain2, .rod, .reminder").fadeIn();
+                    $(".bedroom").fadeOut();
+                    $(".reminder").html("click the curtains to open them");
                 }
 
                 if (dialogueProgression == 3) {
-                    $('.dialogue').html('Oh I think I can see something in the window')
-                }
-                
-                if (dialogueProgression == 4){
-                    document.getElementById('backgroundMusic').pause()
-                    document.getElementById('creepyMusic').play()
-                    $('.windowWitNum').fadeIn(1000)
-                    $('.curtain1, .curtain2').fadeOut()
-                    $('.dialogue').html('....')
-                }
-                
-                if(dialogueProgression == 5) {
-                    $('.dialogue').html('Oh my god.')
-
+                    $(".dialogue").html("Oh I think I can see something in the window");
                 }
 
+                if (dialogueProgression == 4) {
+                    document.getElementById("backgroundMusic").pause();
+                    document.getElementById("creepyMusic").play();
+                    $(".windowWitNum").show();
+                    $(".curtain1, .curtain2").fadeOut();
+                    $(".dialogue").html("....");
+                }
+
+                if (dialogueProgression == 5) {
+                    $(".dialogue").html("Oh my god.");
+                }
+
+                if (dialogueProgression == 6) {
+                    document.getElementById("backgroundMusic").play();
+                    $(".dialogue").html("well I guess I should help them!");
+                }
+                if (dialogueProgression == 7) {
+                    $(".dialogue").html("I'll grab my phone");
+                    $('.iphone').slideDown()
+                }
             });
 
-            $('.curtain1').click(function() {
+            $(".curtain1").click(function() {
                 curtain1 = true;
-                console.log('click')
-                $('.curtain1').animate({
-                    width: '100px',
-                    left: '850px'
-                }, 1000)
+                console.log("click");
+                $(".curtain1").animate({
+                        width: "100px",
+                        left: "850px",
+                    },
+                    1000
+                );
                 curtains(curtain1, curtain2);
+            });
 
-            })
-
-            $('.curtain2').click(function() {
+            $(".curtain2").click(function() {
                 curtain2 = true;
-                $('.curtain2').animate({
-                    width: '100px',
-                    left: '270px'
-                })
+                $(".curtain2").animate({
+                    width: "100px",
+                    left: "270px",
+                });
                 curtains(curtain1, curtain2);
-            })
+            });
 
             function curtains(curtain1, curtain2) {
                 if (curtain1 && curtain2) {
-                    $('.reminder').fadeOut()
-                    $('.dialogue').html("Lovely")
-                    $('.theHouse, .girl').fadeIn(3000)
-                    
+                    $(".reminder").fadeOut();
+                    $(".dialogue").html("Lovely");
+                    $(".theHouse, .girl").fadeIn(3000);
 
-//                    note to self, I am working on having the girl appear in the window, close up to girl with the number written, then interactive with phone to show putting in number
+                    //                    note to self, I am working on having the girl appear in the window, close up to girl with the number written, then interactive with phone to show putting in number
                 }
             }
 
+            $(".iphone").click(function() {
+                $('.dial').fadeIn()
+                $('.reminder').show().html('Click the numbers on the phone to dial')
+                $('.one, .two, .three, .four, .five, .six, .seven, .eight, .nine, .zero, .star, .hash, .call').show()
+                $('.dialogue').hide()
+            })
+            
+            $('.one').click(function() {
+                console.log('1')
+            });
+            
+            $('.two').click(function() {
+                console.log('2')
+            });
+            
+            $('.three').click(function() {
+                console.log('3')
+            });
+            
+            $('.four').click(function() {
+                console.log('4')
+            });
+            
+            $('.five').click(function() {
+                console.log('5')
+            });
+            
+            $('.six').click(function() {
+                console.log('6')
+            });
+            
+            $('.seven').click(function() {
+                console.log('7')
+            });
+            
+            $('.eight').click(function() {
+                console.log('8')
+            });
+            
+            $('.nine').click(function() {
+                console.log('9')
+            });
+            
+            $('.zero').click(function() {
+                console.log('0')
+            });
+            
+            $('.star').click(function() {
+                console.log('*')
+            });
+            
+            $('.hash').click(function() {
+                console.log('#')
+            });
+            
+            $('.call').click(function() {
+                console.log('calling now')
+            });
+            
+            
 
         });
-
     </script>
-
 </head>
 
 <body>
-
     <audio id="alarm">
         <source src="sound/Alarm%20Clock%20Sound%20Effect%20No%20Copyright%20(HQ).mp3" />
     </audio>
@@ -114,39 +174,57 @@
     <audio id="backgroundMusic">
         <source src="sound/SpongeBob%20SquarePants%20Production%20Music%20-%20Bell%20Hop%20(a).mp3" />
     </audio>
-    
+
     <audio id="creepyMusic">
-        <source src="sound/Banging%20on%20rusty%20piano%20strings%20-%20eerie%20horror%20sounds,%20low%20resonance.%20-%20Sound%20effect.mp3" />
+        <source src="sound/jump2.mp3" />
+        />
     </audio>
 
     <div class="background">
-
         <img class="window" src="images/editedWindow.png" />
         <img class="curtain1" src="images/half%20window.png" />
         <img class="curtain2" src="images/half%20window.png" />
         <img class="rod" src="images/justTheRod.png" />
         <img class="theHouse" src="images/houseAtDay.png" />
         <img class="windowWitNum" src="./images/creepyWindow.jpg.png" />
+        <img class="iphone" src="/images/iphone.jpg" />
+        <img class="dial" src="images/dial.jpg" />
+
+        <div class="one"> </div>
+        <div class="two"> </div>
+        <div class="three"> </div>
+        <div class="four"> </div>
+        <div class="five"> </div>
+        <div class="six"> </div>
+        <div class="seven"> </div>
+        <div class="eight"> </div>
+        <div class="nine"> </div>
+        <div class="zero"> </div>
+        <div class="star"> </div>
+        <div class="hash"></div>
+        <div class="call"></div>
+
+
+
+
+
+
+
+
+
+
+
 
         <div class="dialogueBox">
-
             <p class="dialogue"></p>
 
             <p class="reminder"></p>
-
         </div>
 
         <img class="clock" src="images/alarm%20clock.jpg.png" />
         <img class="bedroom" src="images/FaithBedroom.jpg" />
 
         <h1 class="time"></h1>
-        
-        <p class="number">0425021283</p>
-
 
     </div>
-
-
-</body>
-
-</html>
+</body></html>

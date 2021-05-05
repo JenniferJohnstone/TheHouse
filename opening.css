@@ -50,7 +50,7 @@ body {
     border-color: white;
     border-width: 1px;
     width: 800px;
-    background: rgba(117, 117, 117, 0.7) /* grey background with 30% opacity */;
+    background: rgba(117, 117, 117, 0.8) /* grey background with 30% opacity */;
     position: absolute;
     top: 500px;
     left: 220px;

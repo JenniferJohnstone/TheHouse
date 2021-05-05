@@ -59,7 +59,7 @@ h1{
     width: 800px;
     background: rgba(117, 117, 117, 0.7) /* grey background with 30% opacity */;
     position: absolute;
-    top: 500px;
+    top: 530px;
     left: 220px;
     z-index: 8;
 }
@@ -121,6 +121,64 @@ h1{
     left: 0;
     top: 0;
     display: none;
+}
+
+.iphone {
+    position: absolute; 
+    z-index: 7;
+    width: 130px;
+    bottom: 10px;
+    right: 10px;
+    display: none;
+}
+
+.dial {
+    position: absolute; 
+    z-index: 7;
+    width: 400px;
+    left: 400px;
+    height: 650px;
+    display: none;
+}
+
+.one, .two, .three, .four, .five, .six, .seven, .eight, .nine, .zero, .star,  .hash, .call {
+    position: absolute; 
+    width: 70px;
+    height: 60px;
+    z-index: 8;
+    left: 470px;
+    top: 205px;
+    border-radius: 25px;
+    display: none;
+}
+
+.two, .five, .eight, .zero, .call {
+    left:565px;
+}
+
+.three, .six, .nine, .hash {
+    left: 660px;
+}
+
+.four, .five, .six {
+    top: 270px;
+
+}
+
+.seven, .eight, .nine {
+    top: 340px;
+}
+
+.zero, .star, .hash {
+    top: 410px;
+}
+
+.call {
+    top: 480px;
+}
+
+.call {
+    background-color: red;
 }
 
 
