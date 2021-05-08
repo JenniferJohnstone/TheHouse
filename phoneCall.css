@@ -177,8 +177,11 @@ h1{
     top: 480px;
 }
 
-.call {
-    background-color: red;
+.phoneNumber {
+    position: absolute; 
+    z-index: 10;
 }
+
+
 
 

@@ -8,6 +8,7 @@
             var dialogueProgression = 0;
             var curtain1 = false;
             var curtain2 = false;
+            var dialledNum = "";
 
             $(".time").html("6:59");
 
@@ -41,10 +42,18 @@
                 }
 
                 if (dialogueProgression == 3) {
-                    $(".dialogue").html("Oh I think I can see something in the window");
+                    $(".dialogue").html("I wonder if that old lady is doing okay...")
                 }
 
                 if (dialogueProgression == 4) {
+                    $(".dialogue").html("What could of happened to her?")
+                }
+
+                if (dialogueProgression == 5) {
+                    $(".dialogue").html("Oh I think I can see something in the window");
+                }
+
+                if (dialogueProgression == 6) {
                     document.getElementById("backgroundMusic").pause();
                     document.getElementById("creepyMusic").play();
                     $(".windowWitNum").show();
@@ -52,15 +61,15 @@
                     $(".dialogue").html("....");
                 }
 
-                if (dialogueProgression == 5) {
+                if (dialogueProgression == 7) {
                     $(".dialogue").html("Oh my god.");
                 }
 
-                if (dialogueProgression == 6) {
+                if (dialogueProgression == 8) {
                     document.getElementById("backgroundMusic").play();
                     $(".dialogue").html("well I guess I should help them!");
                 }
-                if (dialogueProgression == 7) {
+                if (dialogueProgression == 9) {
                     $(".dialogue").html("I'll grab my phone");
                     $('.iphone').slideDown()
                 }
@@ -92,8 +101,6 @@
                     $(".reminder").fadeOut();
                     $(".dialogue").html("Lovely");
                     $(".theHouse, .girl").fadeIn(3000);
-
-                    //                    note to self, I am working on having the girl appear in the window, close up to girl with the number written, then interactive with phone to show putting in number
                 }
             }
 
@@ -103,60 +110,107 @@
                 $('.one, .two, .three, .four, .five, .six, .seven, .eight, .nine, .zero, .star, .hash, .call').show()
                 $('.dialogue').hide()
             })
-            
+
+            function numberCheck() {
+                if (dialledNum.length == 10) {
+                    console.log('its 10 digits')
+                    dialledNum = null;
+                    document.getElementById("ringing").play()
+                }
+            }
+
+
             $('.one').click(function() {
-                console.log('1')
+                document.getElementById("buttonSound").play()
+                dialledNum = dialledNum + '1'
+                console.log('1', dialledNum.length)
+                numberCheck()
             });
-            
+
             $('.two').click(function() {
+                document.getElementById("buttonSound").play()
+                dialledNum = dialledNum + '2'
                 console.log('2')
+                numberCheck()
             });
-            
+
             $('.three').click(function() {
+                document.getElementById("buttonSound").play()
+                dialledNum = dialledNum + '3'
                 console.log('3')
+                numberCheck()
             });
-            
+
             $('.four').click(function() {
+                document.getElementById("buttonSound").play()
+                dialledNum = dialledNum + '4'
                 console.log('4')
+                numberCheck()
             });
-            
+
             $('.five').click(function() {
+                document.getElementById("buttonSound").play()
+                dialledNum = dialledNum + '5'
                 console.log('5')
+                numberCheck()
             });
-            
+
             $('.six').click(function() {
+                document.getElementById("buttonSound").play()
+                dialledNum = dialledNum + '6'
                 console.log('6')
+                numberCheck()
             });
-            
+
             $('.seven').click(function() {
+                document.getElementById("buttonSound").play()
+                dialledNum = dialledNum + '7'
                 console.log('7')
+                numberCheck()
             });
-            
+
             $('.eight').click(function() {
+                document.getElementById("buttonSound").play()
+                dialledNum = dialledNum + '8'
                 console.log('8')
+                numberCheck()
             });
-            
+
             $('.nine').click(function() {
+                document.getElementById("buttonSound").play()
+                dialledNum = dialledNum + '9'
                 console.log('9')
+                numberCheck()
             });
-            
+
             $('.zero').click(function() {
+                document.getElementById("buttonSound").play()
+                dialledNum = dialledNum + '0'
                 console.log('0')
+                numberCheck()
             });
-            
+
             $('.star').click(function() {
+                document.getElementById("buttonSound").play()
+                dialledNum = dialledNum + '*'
                 console.log('*')
+                numberCheck()
             });
-            
+
             $('.hash').click(function() {
+                document.getElementById("buttonSound").play()
+                dialledNum = dialledNum + '#'
                 console.log('#')
+                numberCheck()
             });
-            
+
             $('.call').click(function() {
+                document.getElementById("ringing").play()
                 console.log('calling now')
+                numberCheck()
             });
-            
-            
+
+
 
         });
     </script>
@@ -180,6 +234,14 @@
         />
     </audio>
 
+    <audio id="ringing">
+        <source src="sound/internalRingign.mp3" />
+    </audio>
+
+    <audio id="buttonSound">
+        <source src="sound/buttonClick.mp3" />
+    </audio>
+
     <div class="background">
         <img class="window" src="images/editedWindow.png" />
         <img class="curtain1" src="images/half%20window.png" />
@@ -189,7 +251,7 @@
         <img class="windowWitNum" src="./images/creepyWindow.jpg.png" />
         <img class="iphone" src="/images/iphone.jpg" />
         <img class="dial" src="images/dial.jpg" />
-
+        
         <div class="one"> </div>
         <div class="two"> </div>
         <div class="three"> </div>
@@ -204,16 +266,7 @@
         <div class="hash"></div>
         <div class="call"></div>
 
-
-
-
-
-
-
-
-
-
-
+        <p class="phoneNumber">0539829302</p>
 
         <div class="dialogueBox">
             <p class="dialogue"></p>
