@@ -77,7 +77,7 @@ h1{
 .curtain1, .curtain2 {
     position: absolute;
     width: 500px;
-    height: 700px;
+    height: 600px;
     z-index: 5;
     top: 50px;
     display: none;
@@ -180,6 +180,10 @@ h1{
 .phoneNumber {
     position: absolute; 
     z-index: 10;
+    left:540px;
+    top: 60px; 
+    font-size: 25px;
+    font-family: sans-serif;
 }
 
 

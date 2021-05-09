@@ -9,6 +9,7 @@
             var curtain1 = false;
             var curtain2 = false;
             var dialledNum = "";
+            var stopProgressing = false;
 
             $(".time").html("6:59");
 
@@ -27,52 +28,61 @@
             });
 
             $(".dialogueBox").click(function() {
-                dialogueProgression++;
+                if (stopProgressing == false) {
 
-                if (dialogueProgression == 1) {
-                    $(".dialogue").html(
-                        "Time to open the curtains and let the sun in!"
-                    );
+
+                    dialogueProgression++;
+
+                    if (dialogueProgression == 1) {
+                        $(".dialogue").html(
+                            "Time to open the curtains and let the sun in!"
+                        );
+                    }
+
+                    if (dialogueProgression == 2) {
+                        $(".window, .curtain1, .curtain2, .rod, .reminder").fadeIn();
+                        $('.dialogue').hide()
+                        $(".bedroom").fadeOut();
+                        $(".reminder").html("click the curtains to open them");
+                    }
+
+                    if (dialogueProgression == 3) {
+                        $(".dialogue").show().html("I wonder if that old lady is doing okay...")
+                    }
+
+                    if (dialogueProgression == 4) {
+                        $(".dialogue").html("What could of happened to her?")
+                    }
+
+                    if (dialogueProgression == 5) {
+                        $(".dialogue").html("Oh I think I can see something in the window");
+                    }
+
+                    if (dialogueProgression == 6) {
+                        document.getElementById("backgroundMusic").pause();
+                        document.getElementById("creepyMusic").play();
+                        $(".windowWitNum").show();
+                        $(".curtain1, .curtain2").fadeOut();
+                        $(".dialogue").html("....");
+                    }
+
+                    if (dialogueProgression == 7) {
+                        $(".dialogue").html("Oh my god.");
+                    }
+
+                    if (dialogueProgression == 8) {
+                        document.getElementById("backgroundMusic").play();
+                        $(".dialogue").html("well I guess I should help them!");
+                    }
+                    if (dialogueProgression == 9) {
+                        $(".dialogue").html("I'll grab my phone");
+                        $('.iphone').slideDown()
+                    }
+                    if (dialogueProgression == 10) {
+                        $('.dialogue').html('h-hello?')
+                    }
                 }
 
-                if (dialogueProgression == 2) {
-                    $(".window, .curtain1, .curtain2, .rod, .reminder").fadeIn();
-                    $(".bedroom").fadeOut();
-                    $(".reminder").html("click the curtains to open them");
-                }
-
-                if (dialogueProgression == 3) {
-                    $(".dialogue").html("I wonder if that old lady is doing okay...")
-                }
-
-                if (dialogueProgression == 4) {
-                    $(".dialogue").html("What could of happened to her?")
-                }
-
-                if (dialogueProgression == 5) {
-                    $(".dialogue").html("Oh I think I can see something in the window");
-                }
-
-                if (dialogueProgression == 6) {
-                    document.getElementById("backgroundMusic").pause();
-                    document.getElementById("creepyMusic").play();
-                    $(".windowWitNum").show();
-                    $(".curtain1, .curtain2").fadeOut();
-                    $(".dialogue").html("....");
-                }
-
-                if (dialogueProgression == 7) {
-                    $(".dialogue").html("Oh my god.");
-                }
-
-                if (dialogueProgression == 8) {
-                    document.getElementById("backgroundMusic").play();
-                    $(".dialogue").html("well I guess I should help them!");
-                }
-                if (dialogueProgression == 9) {
-                    $(".dialogue").html("I'll grab my phone");
-                    $('.iphone').slideDown()
-                }
             });
 
             $(".curtain1").click(function() {
@@ -99,117 +109,159 @@
             function curtains(curtain1, curtain2) {
                 if (curtain1 && curtain2) {
                     $(".reminder").fadeOut();
-                    $(".dialogue").html("Lovely");
+                    $(".dialogue").show().html("Lovely");
                     $(".theHouse, .girl").fadeIn(3000);
                 }
             }
 
             $(".iphone").click(function() {
-                $('.dial').fadeIn()
+                $('.dial, .phoneNumber').fadeIn()
                 $('.reminder').show().html('Click the numbers on the phone to dial')
                 $('.one, .two, .three, .four, .five, .six, .seven, .eight, .nine, .zero, .star, .hash, .call').show()
                 $('.dialogue').hide()
             })
 
             function numberCheck() {
+                $('.reminder').hide()
+                var correctNumber = '0425685973'
+                $('.phoneNumber').html(dialledNum)
                 if (dialledNum.length == 10) {
-                    console.log('its 10 digits')
-                    dialledNum = null;
-                    document.getElementById("ringing").play()
+                    if (dialledNum == correctNumber) {
+                        rightNumber()
+                        return true
+                    } else {
+                        console.log('wrong number')
+                        dialledNum = "";
+                        wrongNumber()
+                        return false
+                    }
                 }
+                return false
             }
 
+            function wrongNumber() {
+                document.getElementById("ringing").play()
+                setTimeout(function() {
+                    document.getElementById("ringing").pause()
+                    document.getElementById("disconnected").play()
+                    $('.dialogue').show()
+                    stopProgressing = true;
+                    $('.dialogue').html("I don't think that's quite right. Let me try again")
+                }, 6000)
+            }
 
-            $('.one').click(function() {
-                document.getElementById("buttonSound").play()
-                dialledNum = dialledNum + '1'
-                console.log('1', dialledNum.length)
-                numberCheck()
-            });
+            function rightNumber() {
+                console.log('correct number')
+                stopProgressing = false;
+                $('.dialogue').fadeIn().html('ringing')
+//                note to self, finish this function and progress the story
+            }
 
-            $('.two').click(function() {
-                document.getElementById("buttonSound").play()
-                dialledNum = dialledNum + '2'
-                console.log('2')
-                numberCheck()
-            });
+            //            The numbers to dial 
 
-            $('.three').click(function() {
-                document.getElementById("buttonSound").play()
-                dialledNum = dialledNum + '3'
-                console.log('3')
-                numberCheck()
-            });
+            if (dialledNum <= 10) {
 
-            $('.four').click(function() {
-                document.getElementById("buttonSound").play()
-                dialledNum = dialledNum + '4'
-                console.log('4')
-                numberCheck()
-            });
 
-            $('.five').click(function() {
-                document.getElementById("buttonSound").play()
-                dialledNum = dialledNum + '5'
-                console.log('5')
-                numberCheck()
-            });
 
-            $('.six').click(function() {
-                document.getElementById("buttonSound").play()
-                dialledNum = dialledNum + '6'
-                console.log('6')
-                numberCheck()
-            });
+                $('.one').click(function() {
+                    document.getElementById("buttonSound").play()
+                    dialledNum = dialledNum + '1'
+                    console.log('1', dialledNum.length)
+                    numberCheck()
+                });
 
-            $('.seven').click(function() {
-                document.getElementById("buttonSound").play()
-                dialledNum = dialledNum + '7'
-                console.log('7')
-                numberCheck()
-            });
+                $('.two').click(function() {
+                    document.getElementById("buttonSound").play()
+                    dialledNum = dialledNum + '2'
+                    console.log('2')
+                    numberCheck()
+                });
 
-            $('.eight').click(function() {
-                document.getElementById("buttonSound").play()
-                dialledNum = dialledNum + '8'
-                console.log('8')
-                numberCheck()
-            });
+                $('.three').click(function() {
+                    document.getElementById("buttonSound").play()
+                    dialledNum = dialledNum + '3'
+                    console.log('3')
+                    numberCheck()
+                });
 
-            $('.nine').click(function() {
-                document.getElementById("buttonSound").play()
-                dialledNum = dialledNum + '9'
-                console.log('9')
-                numberCheck()
-            });
+                $('.four').click(function() {
+                    document.getElementById("buttonSound").play()
+                    dialledNum = dialledNum + '4'
+                    console.log('4')
+                    numberCheck()
+                });
 
-            $('.zero').click(function() {
-                document.getElementById("buttonSound").play()
-                dialledNum = dialledNum + '0'
-                console.log('0')
-                numberCheck()
-            });
+                $('.five').click(function() {
+                    document.getElementById("buttonSound").play()
+                    dialledNum = dialledNum + '5'
+                    console.log('5')
+                    numberCheck()
+                });
 
-            $('.star').click(function() {
-                document.getElementById("buttonSound").play()
-                dialledNum = dialledNum + '*'
-                console.log('*')
-                numberCheck()
-            });
+                $('.six').click(function() {
+                    document.getElementById("buttonSound").play()
+                    dialledNum = dialledNum + '6'
+                    console.log('6')
+                    numberCheck()
+                });
 
-            $('.hash').click(function() {
-                document.getElementById("buttonSound").play()
-                dialledNum = dialledNum + '#'
-                console.log('#')
-                numberCheck()
-            });
+                $('.seven').click(function() {
+                    document.getElementById("buttonSound").play()
+                    dialledNum = dialledNum + '7'
+                    console.log('7')
+                    numberCheck()
+                });
+
+                $('.eight').click(function() {
+                    document.getElementById("buttonSound").play()
+                    dialledNum = dialledNum + '8'
+                    console.log('8')
+                    numberCheck()
+                });
+
+                $('.nine').click(function() {
+                    document.getElementById("buttonSound").play()
+                    dialledNum = dialledNum + '9'
+                    console.log('9')
+                    numberCheck()
+                });
+
+                $('.zero').click(function() {
+                    document.getElementById("buttonSound").play()
+                    dialledNum = dialledNum + '0'
+                    console.log('0')
+                    numberCheck()
+                });
+
+                $('.star').click(function() {
+                    document.getElementById("buttonSound").play()
+                    dialledNum = dialledNum + '*'
+                    console.log('*')
+                    numberCheck()
+                });
+
+                $('.hash').click(function() {
+                    document.getElementById("buttonSound").play()
+                    dialledNum = dialledNum + '#'
+                    console.log('#')
+                    numberCheck()
+                });
+
+            }
 
             $('.call').click(function() {
-                document.getElementById("ringing").play()
-                console.log('calling now')
-                numberCheck()
+                var result = numberCheck()
+                console.log(result)
+                if (result == false) {
+                    dialledNum = ''
+                    wrongNumber()
+                }
             });
 
+            //            Exit viewing the phone
+            $('.windowWitNum').click(function() {
+                $('.dial, .phoneNumber').hide()
+            })
 
 
         });
@@ -242,6 +294,14 @@
         <source src="sound/buttonClick.mp3" />
     </audio>
 
+    <audio id="disconnected">
+        <source src="sound/Phone%20Disconnect%20Tones%20and%20Message.mp3" />
+    </audio>
+
+    <audio id="phoneCallMusic">
+        <source src="sound/phonecallTheme.mp3" />
+    </audio>
+
     <div class="background">
         <img class="window" src="images/editedWindow.png" />
         <img class="curtain1" src="images/half%20window.png" />
@@ -251,7 +311,7 @@
         <img class="windowWitNum" src="./images/creepyWindow.jpg.png" />
         <img class="iphone" src="/images/iphone.jpg" />
         <img class="dial" src="images/dial.jpg" />
-        
+
         <div class="one"> </div>
         <div class="two"> </div>
         <div class="three"> </div>
@@ -266,7 +326,7 @@
         <div class="hash"></div>
         <div class="call"></div>
 
-        <p class="phoneNumber">0539829302</p>
+        <p class="phoneNumber"></p>
 
         <div class="dialogueBox">
             <p class="dialogue"></p>
