@@ -1,0 +1,96 @@
+<html>
+
+<head>
+
+    <link href="theHouse.css" rel="stylesheet" />
+    <script src="jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+
+            var dialogueProgress = 0;
+
+            document.getElementById('outside').play()
+            $('.background').fadeIn(3000)
+            setTimeout(function() {
+                $('.dialogue').html('Okay Grace deep breaths.').fadeIn()
+            }, 1000)
+
+            $('.dalogue').html('well...')
+
+            $('.dialogueBox').click(function() {
+                dialogueProgress++
+
+                if (dialogueProgress == 1) {
+                    $('.dialogue').html('In...')
+                    document.getElementById('breathe').play()
+                }
+                if (dialogueProgress == 2) {
+                    $('.dialogue').html('...and out.')
+                }
+                if (dialogueProgress == 3) {
+                    $(".dialogueBox").css("pointer-events","none");
+                    $('.dialogue').html("Okey dokey. Let's try knocking first, who knows. Maybe someone will come answer.")
+                    $('.reminder').html("click the door to see if anyone's home").show()
+                }
+                
+                if(dialogueProgress == 4) {
+                    $('.dialogue').html("Hmm. Time for plan B, maybe it's open.")
+                    $('.handle').show()
+                    $('.reminder').show().html('click the handle')
+                }
+
+            })
+
+            $('.door').click(function(){
+                document.getElementById('knock').play()
+                $(".dialogueBox, .reminder").hide()
+                setTimeout(function(){
+                    $('.dialogue').html('...')
+                    $(".door").hide()
+                    $(".dialogueBox").show().css("pointer-events","auto");
+                }, 3000)
+
+            })
+            
+            $('.handle').click(function(){
+             document.getElementById('door').play()
+                document.getElementById('outside').pause()
+            $('.background').fadeOut(1000)
+            })
+
+        })
+
+    </script>
+
+</head>
+
+<body>
+    <audio id="outside">
+        <source src="sound/outside.mp3" />
+    </audio>
+    
+    <audio id="knock">
+        <source src="sound/Knocking%20Sound%20Effect.mp3" />
+    </audio>
+    
+    <audio id="breathe">
+        <source src="sound/inAndOut.mp3" />
+    </audio>
+
+    <audio id="door">
+        <source src="sound/squeakydoor.mp3" />
+    </audio>
+    
+    <div class="background">
+        <img class="frontDoor" src="images/frontDoor.png" />
+        <div class="door"></div>
+        <div class="handle"></div>
+        <div class="dialogueBox">
+            <p class="dialogue"></p>
+            <p class="reminder"></p>
+        </div>
+    </div>
+
+</body>
+
+</html>

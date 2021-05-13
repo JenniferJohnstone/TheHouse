@@ -1,5 +1,6 @@
 <html>
-  <head>
+
+<head>
     <link href="phoneCall.css" rel="stylesheet" />
     <script src="jquery-3.6.0.min.js"></script>
 
@@ -41,6 +42,7 @@
 
                     if (dialogueProgression == 2) {
                         $(".window, .curtain1, .curtain2, .rod, .reminder").fadeIn();
+                        $(".dialogueBox").css("pointer-events","none");
                         $('.dialogue').hide()
                         $(".bedroom").fadeOut();
                         $(".reminder").html("click the curtains to open them");
@@ -76,14 +78,73 @@
                     }
                     if (dialogueProgression == 9) {
                         $(".dialogue").html("I'll grab my phone");
+                        $(".dialogueBox").css("pointer-events","none");
                         $('.iphone').slideDown()
                     }
                     if (dialogueProgression == 10) {
                         $('.dialogue').html('h-hello?')
+                        document.getElementById("backgroundMusic").pause();
+                        document.getElementById('phoneCallMusic').play()
+                    }
+                    if (dialogueProgression == 11) {
+                        $('.dialogue').html('Oh thank god you got the number! Thankyou jesus!');
+                        $('.dialogueBox, .dialogue').toggleClass("girlDialogue");
+                    }
+                    if (dialogueProgression == 12) {
+                        $('.dialogue').html("What's going on? Are you okay?")
+                        $('.dialogueBox, .dialogue').toggleClass("girlDialogue");
+
+                    }
+                    if (dialogueProgression == 13) {
+                        $('.dialogue').html("I'm stuck in this room! I've been locked in for a day and I can't get out! You gotta help me PLEASE!")
+                        $('.dialogueBox, .dialogue').toggleClass("girlDialogue");
+                    }
+                    if (dialogueProgression == 14) {
+                        $('.dialogue').html("Calm down, I'll help you. Do you need me to call the police?")
+                        $('.dialogueBox, .dialogue').toggleClass("girlDialogue");
+                    }
+                     if (dialogueProgression == 15) {
+                        $('.dialogue').html("No! I mean there's really no need, just come over right now! I'm sure you can get me out. ")
+                        $('.dialogueBox, .dialogue').toggleClass("girlDialogue");
+                    }
+                    
+                    if(dialogueProgression == 16) {
+                        $('.dialogue').html("Have you tried the window? There's one right here.")
+                        $('.dialogueBox, .dialogue').toggleClass("girlDialogue");
+                    }
+                    
+                    if(dialogueProgression == 17) {
+                        $('.dialogue').html("It's locked too! Please just come here and get this door open. I'm so sick of this room.")
+                        $('.dialogueBox, .dialogue').toggleClass("girlDialogue");
+                    }
+                    if(dialogueProgression == 18) {
+                        $('.dialogue').html("How exactly am I supposed to open it anyway?")
+                        $('.dialogueBox, .dialogue').toggleClass("girlDialogue");
+                    }
+                    if(dialogueProgression == 19) {
+                        $('.dialogue').html("There's a key. Please just come here and I'll explain how you can get it open.")
+                        $('.dialogueBox, .dialogue').toggleClass("girlDialogue");
+                    }
+                    
+                    if(dialogueProgression == 20) {
+                        $('.dialogue').html("Okay okay, I'm coming just hold on.")
+                        $('.dialogueBox, .dialogue').toggleClass("girlDialogue");
+                        document.getElementById('phoneCallMusic').pause()
+                    }
+                    if(dialogueProgression == 21) {
+                        $('.dialogue').html("Time to save the girl next door I guess.")
+
+                    }
+                    if(dialogueProgression == 22) {
+                        $('.background').fadeOut(3000)
+                        setTimeout(function(){
+                            window.location = 'www.google.com'
+                        }, 3000)
                     }
                 }
 
             });
+
 
             $(".curtain1").click(function() {
                 curtain1 = true;
@@ -110,6 +171,7 @@
                 if (curtain1 && curtain2) {
                     $(".reminder").fadeOut();
                     $(".dialogue").show().html("Lovely");
+                    $(".dialogueBox").css("pointer-events","auto");
                     $(".theHouse, .girl").fadeIn(3000);
                 }
             }
@@ -153,11 +215,16 @@
             function rightNumber() {
                 console.log('correct number')
                 stopProgressing = false;
+                $('.dial, .iphone, .phoneNumber, .numbers').fadeOut()
                 $('.dialogue').fadeIn().html('ringing')
-//                note to self, finish this function and progress the story
+                $(".dialogueBox").css("pointer-events","auto");
+                document.getElementById("ringing").play()
+                setTimeout(function() {
+                    document.getElementById("ringing").pause()
+                }, 3000)
+                //                note to self, finish this function and progress the story
             }
 
-            //            The numbers to dial 
 
             if (dialledNum <= 10) {
 
@@ -258,13 +325,14 @@
                 }
             });
 
-            //            Exit viewing the phone
+            //            Exit viewing the phone when dialing the number
             $('.windowWitNum').click(function() {
                 $('.dial, .phoneNumber').hide()
             })
 
 
         });
+
     </script>
 </head>
 
@@ -312,19 +380,21 @@
         <img class="iphone" src="/images/iphone.jpg" />
         <img class="dial" src="images/dial.jpg" />
 
-        <div class="one"> </div>
-        <div class="two"> </div>
-        <div class="three"> </div>
-        <div class="four"> </div>
-        <div class="five"> </div>
-        <div class="six"> </div>
-        <div class="seven"> </div>
-        <div class="eight"> </div>
-        <div class="nine"> </div>
-        <div class="zero"> </div>
-        <div class="star"> </div>
-        <div class="hash"></div>
-        <div class="call"></div>
+        <div class="numbers">
+            <div class="one"> </div>
+            <div class="two"> </div>
+            <div class="three"> </div>
+            <div class="four"> </div>
+            <div class="five"> </div>
+            <div class="six"> </div>
+            <div class="seven"> </div>
+            <div class="eight"> </div>
+            <div class="nine"> </div>
+            <div class="zero"> </div>
+            <div class="star"> </div>
+            <div class="hash"></div>
+            <div class="call"></div>
+        </div>
 
         <p class="phoneNumber"></p>
 
@@ -340,4 +410,6 @@
         <h1 class="time"></h1>
 
     </div>
-</body></html>
+</body>
+
+</html>
