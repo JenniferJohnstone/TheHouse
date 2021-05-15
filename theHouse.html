@@ -1,96 +1,239 @@
 <html>
-
-<head>
-
+  <head>
     <link href="theHouse.css" rel="stylesheet" />
     <script src="jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
+      $(document).ready(function () {
+        var dialogueProgress = 0;
 
-            var dialogueProgress = 0;
+        document.getElementById("ringtone").loop = true;
 
-            document.getElementById('outside').play()
-            $('.background').fadeIn(3000)
-            setTimeout(function() {
-                $('.dialogue').html('Okay Grace deep breaths.').fadeIn()
-            }, 1000)
+        document.getElementById("outside").play();
+        $(".background").fadeIn(3000);
+        setTimeout(function () {
+          $(".dialogue").html("Okay Grace deep breaths.").fadeIn();
+        }, 1000);
 
-            $('.dalogue').html('well...')
+        $(".dalogue").html("well...");
 
-            $('.dialogueBox').click(function() {
-                dialogueProgress++
+        $(".dialogueBox").click(function () {
+          dialogue();
+        });
 
-                if (dialogueProgress == 1) {
-                    $('.dialogue').html('In...')
-                    document.getElementById('breathe').play()
-                }
-                if (dialogueProgress == 2) {
-                    $('.dialogue').html('...and out.')
-                }
-                if (dialogueProgress == 3) {
-                    $(".dialogueBox").css("pointer-events","none");
-                    $('.dialogue').html("Okey dokey. Let's try knocking first, who knows. Maybe someone will come answer.")
-                    $('.reminder').html("click the door to see if anyone's home").show()
-                }
-                
-                if(dialogueProgress == 4) {
-                    $('.dialogue').html("Hmm. Time for plan B, maybe it's open.")
-                    $('.handle').show()
-                    $('.reminder').show().html('click the handle')
-                }
+        function dialogue() {
+          dialogueProgress++;
 
-            })
+          if (dialogueProgress == 1) {
+            $(".dialogue").html("In...");
+            document.getElementById("breathe").play();
+          }
+          if (dialogueProgress == 2) {
+            $(".dialogue").html("...and out.");
+          }
+          if (dialogueProgress == 3) {
+            $(".dialogueBox").css("pointer-events", "none");
+            $(".dialogue").html(
+              "Okey dokey. Let's try knocking first, who knows. Maybe someone will come answer."
+            );
+            $(".reminder")
+              .html("click the door to see if anyone's home")
+              .show();
+            $(".door").show();
+          }
 
-            $('.door').click(function(){
-                document.getElementById('knock').play()
-                $(".dialogueBox, .reminder").hide()
-                setTimeout(function(){
-                    $('.dialogue').html('...')
-                    $(".door").hide()
-                    $(".dialogueBox").show().css("pointer-events","auto");
-                }, 3000)
+          if (dialogueProgress == 4) {
+            $(".dialogue").html("Hmm. Time for plan B, maybe it's open.");
+            $(".dialogueBox").css("pointer-events", "none");
+            $(".handle").show();
+            $(".reminder").show().html("click the handle");
+          }
 
-            })
-            
-            $('.handle').click(function(){
-             document.getElementById('door').play()
-                document.getElementById('outside').pause()
-            $('.background').fadeOut(1000)
-            })
+          if (dialogueProgress == 5) {
+            $(".dialogue").html("I'M COMING!");
+            $(".dialogueBox").css("pointer-events", "none");
+          }
+          if (dialogueProgress == 6) {
+            $(".dialogueBox").css("pointer-events", "auto");
+            $(".dialogue").html(
+              "I know the key is around the house somewhere. I can't stay on the phone too long or the battery will die, so give me a call if you find something."
+            );
+          }
 
-        })
+          if (dialogueProgress == 7) {
+            $(".dialogueBox, .dialogue").toggleClass("girlDialogue");
+            $(".dialogue").html("Okay... I'll do my best.");
+            $(".background").fadeOut(3000);
+            setTimeout(function () {
+              window.location = "theHouse.html";
+            }, 3000);
+          }
+        }
 
+        $(".door").click(function () {
+          document.getElementById("knock").play();
+          $(".dialogueBox, .reminder").hide();
+          setTimeout(function () {
+            $(".dialogue").html("...");
+            $(".door").hide();
+            $(".dialogueBox").show().css("pointer-events", "auto");
+          }, 3000);
+        });
+
+        $(".endDoor").click(function () {
+          document.getElementById("footsteps").play();
+          $(".dialogueBox").hide();
+          $(".endDoor").hide();
+          $(".hallway").fadeOut(2000, function () {
+            $(".atTheDoor").fadeIn(2000);
+            setTimeout(function () {
+              document.getElementById("banging").play();
+              $(".dialogueBox").show();
+              $(".dialogue").html("Can you hear me? I'm getting you out!");
+              $(".endDoorHandle").show();
+            }, 2000);
+          });
+        });
+
+        $(".handle").click(function () {
+          document.getElementById("door").play();
+          document.getElementById("outside").pause();
+          $(".handle").hide();
+          $(".frontDoor").fadeOut(1000);
+          $(".hallway")
+            .delay(1000)
+            .fadeIn(2000, function () {
+              setTimeout(function () {
+                document.getElementById("banging").play();
+              }, 3000);
+              setTimeout(function () {
+                document.getElementById("hallwayAmbience").play();
+                $(".dialogue")
+                  .html(
+                    "That noise... I think it's coming from the door at the hallway"
+                  )
+                  .show();
+                $(".dialogueBox").css("pointer-events", "auto");
+                $(".endDoor").show();
+              }, 6000);
+            });
+          $(".dialogue").hide();
+          $(".reminder").hide();
+        });
+
+        $(".endDoorHandle").click(function () {
+          $(".dialogueBox, endDoorHandle").hide();
+          document.getElementById("doorHandle").play();
+          setTimeout(function () {
+            $(".dialogueBox").show();
+            $(".dialogue").html("Dammit it's locked!");
+            document.getElementById("hallwayAmbience").pause();
+            setTimeout(function () {
+              $(".calling, .recieveCall, .ignoreCall").show();
+              $(".dialogueBox").hide();
+              document.getElementById("ringtone").play();
+            }, 2000);
+          }, 3000);
+        });
+
+        $(".ignoreCall").click(function () {
+          document.getElementById("ringtone").pause();
+          document.getElementById("ringtone").currentTime = 0;
+          $(".calling").hide();
+          setTimeout(function () {
+            document.getElementById("ringtone").play();
+            $(".calling").show();
+          }, 2000);
+        });
+
+        $(".recieveCall").click(function () {
+          document.getElementById("ringtone").pause();
+          document.getElementById("phoneCallMusic").play();
+          $(".calling, .recieveCall, .ignoreCall").hide();
+          $(".dialogueBox, .good, .bad, .dialogue, .iphone").show();
+          $(".good").html(
+            "Of course I did, I have bad news. The door's locked. "
+          );
+          $(".bad").html(
+            "I had no choice with how much you've been freaking out."
+          );
+          $(" .dialogueBox, .dialogue").toggleClass("girlDialogue");
+          $(".dialogue").html("you came!");
+        });
+
+        $(".good").click(function () {
+          localStorage.setItem("goodCounter", 1);
+          $(".good, .bad").hide();
+          dialogue();
+        });
+
+        $(".bad").click(function () {
+          localStorage.setItem("badCounter", 1);
+          $(".good, .bad").hide();
+          dialogue();
+        });
+      });
     </script>
+  </head>
 
-</head>
-
-<body>
+  <body>
     <audio id="outside">
-        <source src="sound/outside.mp3" />
+      <source src="sound/outside.mp3" />
     </audio>
-    
+
     <audio id="knock">
-        <source src="sound/Knocking%20Sound%20Effect.mp3" />
+      <source src="sound/Knocking%20Sound%20Effect.mp3" />
     </audio>
-    
+
     <audio id="breathe">
-        <source src="sound/inAndOut.mp3" />
+      <source src="sound/inAndOut.mp3" />
     </audio>
 
     <audio id="door">
-        <source src="sound/squeakydoor.mp3" />
+      <source src="sound/squeakydoor.mp3" />
     </audio>
-    
+
+    <audio id="banging">
+      <source src="sound/loud banging.mp3" />
+    </audio>
+
+    <audio id="footsteps">
+      <source src="sound/Footsteps - Sound Effect.mp3" />
+    </audio>
+
+    <audio id="hallwayAmbience">
+      <source src="sound/hallwayambience.mp3" />
+    </audio>
+
+    <audio id="doorHandle">
+      <source src="sound/door handle shake.mp3" />
+    </audio>
+
+    <audio id="ringtone">
+      <source src="sound/ringTone.mp3" />
+    </audio>
+
+    <audio id="phoneCallMusic">
+      <source src="sound/phonecallTheme.mp3" />
+    </audio>
+
     <div class="background">
-        <img class="frontDoor" src="images/frontDoor.png" />
-        <div class="door"></div>
-        <div class="handle"></div>
-        <div class="dialogueBox">
-            <p class="dialogue"></p>
-            <p class="reminder"></p>
-        </div>
+      <img class="frontDoor" src="images/frontDoor.png" />
+      <img class="hallway" src="images/hallway.jpg" />
+      <img class="atTheDoor" src="images/spooky door.png" />
+      <img class="calling" src="images/incomingCall.png" />
+      <img class="iphone" src="/images/incomingCall.png" />
+      <div class="door"></div>
+      <div class="handle"></div>
+      <div class="endDoor"></div>
+      <div class="endDoorHandle"></div>
+      <div class="ignoreCall"></div>
+      <div class="recieveCall"></div>
+      <p class="good"></p>
+      <p class="bad"></p>
+      <div class="dialogueBox">
+        <p class="dialogue"></p>
+        <p class="reminder"></p>
+      </div>
     </div>
-
-</body>
-
+  </body>
 </html>
