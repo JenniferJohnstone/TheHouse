@@ -1,0 +1,60 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="hallway.css" />
+    <script src="./jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+
+        document.getElementById('hallwayAmbience').play()
+
+        $('.bedroom').hover(function(){
+            $('.goBed, .arrow').toggle()
+            $('.arrow').toggleClass('arrow1')
+        })
+
+        $('.cupboard').hover(function(){
+            $('.goCup, .arrow').toggle()
+            $('.arrow').toggleClass('arrow2')
+        })
+
+        $('.livingRoom').hover(function(){
+            $('.goLiv, .arrow').toggle()
+            $('.arrow').toggleClass('arrow2')
+        })
+
+        $('.kitchen').hover(function(){
+            $('.goKit, .arrow').toggle()
+            $('.arrow').toggleClass('arrow3')
+        })
+
+      });
+    </script>
+    
+</head>
+
+<body>
+
+    <audio id="hallwayAmbience">
+        <source src="sound/hallwayambience.mp3" />
+      </audio>
+
+    <div class="background">
+        <img class="arrow" src="./images/arrow.png" />
+        <div class="bedroom"></div>
+        <p class="GoBed">Go to bedroom</p>
+        <div class="cupboard"></div>
+        <p class="goCup">Go to cupbaord </p>
+        <div class="livingRoom"></div>
+        <p class="goLiv">Go to living room</p>
+        <div class="kitchen"></div>
+        <p class="goKit">Go to Kitchen</p>
+        <div class="dialogueBox">
+            <p class="dialogue"></p>
+            <p class="reminder"></p>
+        </div>
+    </div>
+
+</body>
+
+</html>
