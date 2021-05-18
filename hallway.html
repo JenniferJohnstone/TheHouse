@@ -41,6 +41,12 @@
         $(".livingRoom").hover(function () {
           $(".goLiv, .arrow").toggle();
           $(".arrow").toggleClass("arrow2");
+        }).click(function(){
+          $(".background").fadeOut(3000);
+            document.getElementById("footsteps").play();
+            setTimeout(function () {
+              window.location = "livingRoom.html";
+            }, 3000);
         });
 
         $(".kitchen").hover(function () {

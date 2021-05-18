@@ -1,0 +1,55 @@
+.background{
+    background-image: url('/images/livingRoom.jpg');
+}
+
+.bible{
+    position: absolute;
+    left: 100px;
+    bottom: 30px;
+}
+
+.bible:hover, .key:hover, .goBack:hover{
+    filter: brightness(0.3);
+    cursor: pointer;
+}
+
+.open{
+    position: absolute;
+    width: 700px;
+    bottom: -10px;
+    left: 280px;
+    display: none;
+    z-index: 0;
+}
+
+.choice1, .choice2, .choice3, .choice4 {
+    background-color: white;
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    display: none;
+}
+
+.choice1:hover, .choice2:hover, .choice3:hover, .choice4:hover {
+    background-color: black;
+    color: white;
+}
+
+.key{
+    display: none;
+    position: absolute;
+    z-index: 1;
+    transform: rotate(250deg);
+    width: 100px;
+    top: 400px;
+}
+
+.goBack {
+    background-color: white;
+    color: red;
+    width: 100px;
+    position: absolute;
+    left: 100px;
+}
+
