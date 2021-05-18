@@ -1,0 +1,293 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/bedroom.css" />
+    <script src="./jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        sessionStorage.setItem('bedroom', 'done')
+        var dialogueProgress = 0;
+        var clicked = false;
+        var currentPage = 0;
+        var choiceProgress = 0;
+
+        document.getElementById("mainTheme").play();
+        document.getElementById("mainTheme").loop = true;
+
+        $(".diary").click(function () {
+          if (clicked == true) {
+            $(".pages").show();
+            document.getElementById("pageFlick").play();
+          }
+          $(".dialogueBox").show();
+          $(".dialogue").html(
+            "I think this looks like someone's diary. Maybe it belongs to the girl in the closet."
+          );
+          clicked = true;
+          $(".diary").css("pointer-events", "none");
+        });
+
+        $(".dialogueBox").click(function () {
+          dialogueProgress++;
+
+          if (dialogueProgress == 1) {
+            $(".dialogue").html(
+              "Maybe I should call her and ask if it's okay to read it first, I wouldn't want to be rude."
+            );
+          }
+
+          if (dialogueProgress == 2) {
+            $('.dialogueBox').css('pointer-events', 'none')
+            $(".reminder, .good, .bad").show();
+            $(".reminder").html("Should you ask permission?");
+            $(".good").html("ask permission first");
+            $(".bad").html(
+              "no one is gonna know, there's no point wasting time"
+            );
+          }
+
+          if (dialogueProgress == 3) {
+            $(".dialogueBox, .dialogue").toggleClass("girlDialogue");
+            $(".dialogue").html(
+              "I found a diary, seems like a good place to look for a key. Can I open it?"
+            );
+          }
+
+          if (dialogueProgress == 4) {
+            $(".dialogueBox, .dialogue").toggleClass("girlDialogue");
+            $(".dialogue").html(
+              "Whatever you need to do to find that key is okay with me."
+            );
+          }
+
+          if (dialogueProgress == 5) {
+            $(".dialogueBox, .dialogue").toggleClass("girlDialogue");
+            $(".dialogue").html("Oh alright then.");
+            $(".iphone").slideUp();
+          }
+
+          if (dialogueProgress == 6) {
+            document.getElementById("pageFlick").play();
+            $(".dialogueBox, .diary").hide();
+            $(".page1, .next").show();
+          }
+          if (dialogueProgress == 7) {
+            $(".dialogue").html(
+              "'Only a matter of time...' Oh no. She didn't... did she?"
+            );
+            $(".dialogueBox").css("pointer-events", "none");
+            document.getElementById("mainTheme").pause();
+            setTimeout(function () {
+              $(".calling, .ignoreCall, .recieveCall").show();
+              $(".dialogueBox").hide();
+              document.getElementById("ringtone").play();
+            }, 3000);
+          }
+          if (dialogueProgress == 8) {
+            $(".dialogueBox, .dialogue").toggleClass("girlDialogue").css('pointer-events', 'none');
+            $(".dialogue").html("Not yet...");
+            $(".good, .bad").show();
+            $(".good").html("Actually I wanted to ask you something");
+            $(".bad").html(
+              "If you actually gave me some time to look instead of calling i'll find it sooner!"
+            );
+          }
+          if (dialogueProgress == 9) {
+            document.getElementById('callTheme').play()
+            $(".dialogueBox, .dialogue").toggleClass("girlDialogue");
+            $(".dialogue").html(
+              "It's important.The old lady who lives here, is she your mum?"
+            );
+          }
+          if (dialogueProgress == 10) {
+            $(".dialogueBox, .dialogue").toggleClass("girlDialogue");
+            $(".dialogue").html("Sadly, yes. Is there anything else?");
+          }
+          if (dialogueProgress == 11) {
+            $(".dialogueBox, .dialogue").toggleClass("girlDialogue");
+            $(".dialogue").html(
+              "How long have you been living here then? I moved in here 3 months ago and I've never seen you before"
+            );
+          }
+          if (dialogueProgress == 12) {
+            $(".dialogueBox, .dialogue").toggleClass("girlDialogue");
+            $(".dialogue").html(
+              "Since I was born... She stopped...letting me go outside..."
+            );
+          }
+          
+          if (dialogueProgress == 13) {
+            $(".dialogue").html(
+              "Oh that's so sad. I'm sorry she did that to you, I think if it wasn't for that we could of been friends. "
+            );
+          }
+          if (dialogueProgress == 14) {
+            $(".dialogue").html(
+              "We're wasiting time. Please keep looking for the key, I'm sure you can find it. "
+            );
+          }
+          if (dialogueProgress == 15) {
+              document.getElementById('callTheme').pause()
+            $(".iphone").slideUp();
+            $(".background").fadeOut(3000);
+            setTimeout(function(){
+                window.location = "hallway.html";
+            }, 3000)
+          }
+        });
+
+        function addPoint(value) {
+          choiceProgress++;
+          if (value == "good") {
+            var point = parseInt(sessionStorage.getItem("goodCounter"));
+            point++;
+            sessionStorage.setItem("goodCounter", point);
+          }
+          if (value == "bad") {
+            var point = parseInt(sessionStorage.getItem("badCounter"));
+            point++;
+            sessionStorage.setItem("badCounter", point);
+          }
+        }
+
+        function addClue(){
+            var clues = sessionStorage.getItem('cluesFound')
+            if(clues == null){
+                sessionStorage.setItem('cluesFound', '1')
+            } else {
+                clues = parseInt(clues)
+                clues++;
+                sessionStorage.setItem('cluesFound', clues)
+            }
+        }
+
+        $(".good").on("click", function () {
+          addPoint("good");
+          if (choiceProgress == 2) {
+            addClue()
+            $('.good, .bad').hide()
+            $(".dialogue").html("Can it wait till after you get me out?");
+            $('.dialogueBox, .dialogue').css('pointer-events', 'auto')
+          } else {
+            $(".good, .bad, .dialogueBox, .reminder").hide();
+            $(".iphone").slideDown();
+            document.getElementById("ringing").play();
+            setTimeout(function () {
+              document.getElementById("ringing").pause();
+              $(".ringing").hide();
+              $('.dialogueBox').css('pointer-events', 'auto')
+              $(".dialogueBox, .dialogue ").show().toggleClass("girlDialogue");
+              $(".dialogue").html("Hello?").show();
+            }, 2000);
+          }
+        });
+
+        $(".bad").click(function () {
+          addPoint("bad");
+          if (choiceProgress == 2) {
+            $(".dialogue").html(
+              "Well sorry geeze! Don't mind me locked up in here for hours with no way out."
+            );
+            dialogueProgress = 14;
+            $('.dialogueBox').css('pointer-events', 'auto')
+
+          } else {
+              document.getElementById("pageFlick").play();
+          $(".dialogueBox, .diary, .good, .bad").hide();
+          $(".page1, .next").show();
+          }
+        });
+
+        $(".next").click(function () {
+          document.getElementById("pageFlick").play();
+          if (currentPage == 0) {
+            console.log(currentPage);
+            $(".page1").hide();
+            $(".page2").show();
+            currentPage++;
+          } else if (currentPage == 1) {
+            $(".page2").hide();
+            $(".page3").show();
+            currentPage++;
+          } else if (currentPage == 2) {
+            console.log(currentPage, "second");
+            $(".page3").hide();
+            $(".page4").show();
+            $(".next").hide();
+            currentPage++;
+            setTimeout(function () {
+              $(".dialogueBox").show().css('pointer-events', 'auto');
+              $(".reminder").hide();
+              $(".dialogue").html("I wonder what kind of brew she means...");
+              dialogueProgress = 6;
+            }, 2000);
+          }
+        });
+
+        $(".recieveCall").click(function () {
+          document.getElementById("ringtone").pause();
+          $(".calling, .recieveCall, .ignoreCall").hide();
+          $(".iphone").show();
+          $(".dialogueBox, .dialogue")
+            .toggleClass("girlDialogue")
+            .css("pointer-events", "auto")
+            .show();
+          $(".dialogue").html("Did you find the key?");
+        });
+
+        $(".ignoreCall").click(function () {
+          document.getElementById("ringtone").pause();
+          document.getElementById("ringtone").currentTime = 0;
+          $(".calling").hide();
+          setTimeout(function () {
+            document.getElementById("ringtone").play();
+            $(".calling").show();
+          }, 2000);
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <audio id="mainTheme">
+      <source src="/sound/bedroom theme.mp3" />
+    </audio>
+
+    <audio id="ringing">
+      <source src="/sound/internalRingign.mp3" />
+    </audio>
+
+    <audio id="pageFlick">
+      <source src="/sound/Book Flipping Sound Effect.mp3" />
+    </audio>
+
+    <audio id="ringtone">
+      <source src="sound/ringTone.mp3" />
+    </audio>
+
+    <audio id="callTheme">
+      <source src="/sound/phonecallTheme.mp3" />
+    </audio>
+
+    <div class="background">
+      <img class="diary" src="/images/diaryUnOpen.png" />
+      <img class="iphone" src="/images/incomingCall.png" />
+      <img class="calling" src="images/incomingCall.png" />
+      <div class="ignoreCall"></div>
+      <div class="recieveCall"></div>
+      <img class="page1" src="/images/diary/page1.png" />
+      <img class="page2" src="/images/diary/page2.png" />
+      <img class="page3" src="/images/diary/page3.png" />
+      <img class="page4" src="/images/diary/page4.png" />
+      <div class="next">
+        <img class="arrow" src="/images/arrow.png" />
+        <p class="nextPage">Next page</p>
+      </div>
+      <p class="good"></p>
+      <p class="bad"></p>
+      <div class="dialogueBox">
+        <p class="dialogue"></p>
+        <p class="reminder"></p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,151 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="kitchen.css" />
+    <script src="./jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        var dialogueProgress = 0;
+        cluesFound = 0;
+
+        document.getElementById("kitchenTheme").play();
+        document.getElementById("kitchenTheme").loop = true;
+        $(".dialogueBox").show();
+        $(".dialogue").html("Sheeesh. What a mess. ");
+        $(".jack, .sink").css("pointer-events", "none");
+
+        $(".dialogueBox").click(function () {
+          dialogueProgress++;
+          if (dialogueProgress == 1) {
+            $(".dialogue").html(
+              "How on earth am I gonna find a key with all this?"
+            );
+          }
+          if (dialogueProgress == 2) {
+            $(".dialogue").hide();
+            $(".reminder").html("search the room");
+            $(".dialogueBox").css("pointer-events", "none");
+            $(".jack, .sink").css("pointer-events", "auto");
+          }
+          if (dialogueProgress == 3) {
+            $(".dialogue").html("What is that?");
+            document.getElementById("sniff").play();
+          }
+          if (dialogueProgress == 4) {
+            $(".background").animate(
+              {
+                opacity: 0.4,
+              },
+              1000,
+              function () {
+                $(".background").animate(
+                  {
+                    opacity: 1,
+                  },
+                  1000
+                );
+              }
+            );
+            $(".dialogue").html("Oh geeze... I feel a bit woozy...");
+          }
+
+          if (dialogueProgress == 5) {
+            $(".dialogue").html(
+              "Whatever was in there, I don't think it was whiskey"
+            );
+          }
+          if (dialogueProgress == 6) {
+            cluesFound++;
+            clueCheck()
+            $(".dialogue").hide();
+            $(".reminder").show();
+            $(".dialogueBox").css("pointer-events", "none");
+          }
+        });
+
+        $(".jack").click(function () {
+          $(".reminder").hide();
+          $(".dialogue")
+            .show()
+            .html("There's a really odd smell coming from it.");
+          $(".dialogueBox").css("pointer-events", "auto");
+        });
+
+        $(".sink").click(function () {
+          $(".sink, .jack, .dialogueBox").hide();
+          $(".bloodySink").show();
+          document.getElementById("jump").play();
+          setTimeout(function () {
+            $(".dialogueBox, .dialogue").show();
+            $(".reminder").hide();
+            $(".dialogue").html("Oh my god. What happened?");
+            cluesFound++;
+            clueCheck()
+          }, 1000);
+        });
+
+        function clueCheck(cluesFound) {
+          if (cluesFound == 2) {
+            $(".calling, .ignoreCall, .recieveCall").show();
+              $(".dialogueBox").hide();
+              document.getElementById("ringtone").play();
+          }
+        }
+
+
+        $(".recieveCall").click(function () {
+          document.getElementById("ringtone").pause();
+          $(".calling, .recieveCall, .ignoreCall").hide();
+          $(".iphone").show();
+          $(".dialogueBox, .dialogue")
+            .toggleClass("girlDialogue")
+            .css("pointer-events", "auto")
+            .show();
+          $(".dialogue").html("Did you find the key?");
+        });
+
+        $(".ignoreCall").click(function () {
+          document.getElementById("ringtone").pause();
+          document.getElementById("ringtone").currentTime = 0;
+          $(".calling").hide();
+          setTimeout(function () {
+            document.getElementById("ringtone").play();
+            $(".calling").show();
+          }, 2000);
+        });
+
+      });
+    </script>
+  </head>
+
+  <body>
+    <audio id="kitchenTheme">
+      <source src="/sound/kitchenTheme.mp3" />
+    </audio>
+
+    <audio id="sniff">
+      <source src="/sound/sniff sniff.mp3" />
+    </audio>
+
+    <audio id="jump">
+      <source src="/sound/Jumpscare Sound Effect.mp3" />
+    </audio>
+
+    <audio id="ringtone">
+        <source src="sound/ringTone.mp3" />
+      </audio>
+
+    <div class="background">
+      <img class="jack" src="./images/jack.png" />
+      <img class="sink" src="./images/sink.png" />
+      <img class="bloodySink" src="./images/blood in sink.jpg" />
+      <img class="iphone" src="/images/incomingCall.png" />
+      <img class="calling" src="images/incomingCall.png" />
+      <div class="ignoreCall"></div>
+      <div class="recieveCall"></div>
+      <div class="dialogueBox">
+        <p class="dialogue"></p>
+        <p class="reminder"></p>
+      </div>
+    </div>
+  </body>
+</html>

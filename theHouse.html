@@ -65,7 +65,7 @@
             $(".background").fadeOut(3000);
             setTimeout(function () {
               window.location = "hallway.html";
-            }, 3000);
+            }, 6000);
           }
         }
 
@@ -161,13 +161,15 @@
         });
 
         $(".good").click(function () {
-          localStorage.setItem("goodCounter", 1);
+          sessionStorage.setItem("goodCounter", 1);
+          sessionStorage.setItem("badCounter", 0);
           $(".good, .bad").hide();
           dialogue();
         });
 
         $(".bad").click(function () {
-          localStorage.setItem("badCounter", 1);
+          sessionStorage.setItem("badCounter", 1);
+          sessionStorage.setItem("goodCounter", 0);
           $(".good, .bad").hide();
           dialogue();
         });
