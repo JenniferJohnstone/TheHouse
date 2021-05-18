@@ -24,6 +24,9 @@
           });
 
         $(".cupboard").hover(function () {
+          if(sessionStorage.getItem('closet') == 'done'){
+            $('.cupboard').hide()
+          }
           $(".goCup, .arrow").toggle();
           $(".arrow").toggleClass("arrow2");
         }).click(function(){

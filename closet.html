@@ -5,7 +5,10 @@
     <script src="./jquery-3.6.0.min.js"></script>
     <script>
       $(document).ready(function () {
+        sessionStorage.setItem("closet", "done");
         var dialogueProgress = 0;
+        var choiceProgress = 0;
+        document.getElementById("closetTheme").play();
 
         $(".dialogueBox").show();
         $(".dialogue").html("An empty closet...");
@@ -25,18 +28,69 @@
             $(".verse").show();
           }
           if (dialogueProgress == 4) {
-              document.getElementById("closetTheme").pause();
-              setTimeout(function () {
-                $(".calling, .ignoreCall, .recieveCall").show();
-                $(".dialogueBox").hide();
-                document.getElementById("ringtone").play();
-              }, 1000);
+            document.getElementById("closetTheme").pause();
+            setTimeout(function () {
+              $(".calling, .ignoreCall, .recieveCall").show();
+              $(".dialogueBox").hide();
+              document.getElementById("ringtone").play();
+            }, 1000);
           }
+          if (dialogueProgress == 5) {
+            $(".dialogue, .dialogueBox").toggleClass("girlDialogue");
+            $(".dialogue").html(
+              "A prayer closet? You need a closet for praying?"
+            );
+          }
+          if (dialogueProgress == 6) {
+            $(".dialogue, .dialogueBox")
+              .toggleClass("girlDialogue")
+              .css("pointer-events", "none");
+            $(".dialogue").html(
+              "It's more like a glorified naughty corner really...You don't wanna know how many hours i've spent in there."
+            );
+            $(".good").show().html("You got locked in here? Why?");
+            $(".bad")
+              .show()
+              .html(
+                "Baha a naughty corner! This lady super nanny or something?"
+              );
+          }
+          if(dialogueProgress == 7){
+            $(".dialogue, .dialogueBox").toggleClass("girlDialogue")
+            $('.dialogue').html('That sounds horrible.')
+          }
+          if(dialogueProgress == 8){
+            $(".dialogue, .dialogueBox").toggleClass("girlDialogue")
+            $('.dialogue').html("It's okay I think it's over now.")
+          }
+          if(dialogueProgress == 9){
+            $(".dialogue, .dialogueBox").toggleClass("girlDialogue")
+            $('.dialogue').html("Over? What do you mean? ")
+          }
+          if(dialogueProgress == 10){
+            $(".dialogue, .dialogueBox").toggleClass("girlDialogue")
+            $('.dialogue').html("Oh uh... nevermind. I'll let you get back to looking for the key. Good luck!")
+            dialogueProgress = 12;
+          }
+          if(dialogueProgress == 11){
+            $(".dialogue, .dialogueBox").toggleClass("girlDialogue")
+            $('.dialogue').html("Let me get back to looking for this key then. I'll give you a call when I find it.")
+          }
+          if(dialogueProgress == 12){
+            $(".iphone").slideUp()
+          }
+          if(dialogueProgress == 13){
+            $('.dialogueBox').hide()
+            $('.background').fadeOut(3000)
+            setTimeout(function(){
+              window.location = 'hallway.html'
+            }, 3000)
+          }
+
         });
 
-        document.getElementById("closetTheme").play();
-
         $(".maga").click(function () {
+          $('.maga').hide()
           document.getElementById("wood").play();
           $(".dialogueBox").show();
           $(".dialogue").html(
@@ -50,9 +104,8 @@
         });
 
         $(".recieveCall").click(function () {
-          $(".reminder, .jack, .sink").hide();
           document.getElementById("ringtone").pause();
-          document.getElementById("kitchenTheme").play();
+          document.getElementById("closetTheme").play();
           $(".calling, .recieveCall, .ignoreCall").hide();
           $(".iphone").show();
           $(".dialogueBox, .dialogue")
@@ -62,10 +115,10 @@
           $(".dialogue").html("Did you find the key?");
           $(".good, .bad").show();
           $(".good").html(
-            "Not yet, I'm looking. I need to ask you about something I did find however..."
+            "No key here I'm afraid. I'm in a really weird room though."
           );
           $(".bad").html(
-            "Honestly it seems impossible to find anything in a house this messy."
+            "Nah but I found the Jesus closet. Gotta say my prayers ya know."
           );
         });
 
@@ -78,6 +131,56 @@
             $(".calling").show();
           }, 2000);
         });
+
+        function addPoint(value) {
+          choiceProgress++;
+          if (value == "good") {
+            var point = parseInt(sessionStorage.getItem("goodCounter"));
+            point++;
+            sessionStorage.setItem("goodCounter", point);
+          }
+          if (value == "bad") {
+            var point = parseInt(sessionStorage.getItem("badCounter"));
+            point++;
+            sessionStorage.setItem("badCounter", point);
+          }
+        }
+
+        function addClue() {
+          var clues = sessionStorage.getItem("cluesFound");
+          if (clues == null) {
+            sessionStorage.setItem("cluesFound", "1");
+          } else {
+            clues = parseInt(clues);
+            clues++;
+            sessionStorage.setItem("cluesFound", clues);
+          }
+        }
+
+        $(".good").click(function () {
+          $(".good, .bad").hide();
+          addPoint("good");
+          if(choiceProgress == 2){
+            $('.dialogue').html("For punishment. Sometimes I didn't even know what I had done wrong half the time.")
+            $('.dialogueBox').css('pointer-events', 'auto')
+          } else {
+            $(".dialogue").html("Oh you found the prayer closet!");
+          }
+        });
+
+        $('.bad').click(function(){
+          $(".good, .bad").hide();
+          addPoint("bad")
+          if(choiceProgress == 2){
+            $('.dialogue').html("Supernanny... Good one. Look we don't have time for joking around. I really need to get out of here.")
+            dialogueProgress = 10;
+            $('.dialogueBox').css('pointer-events', 'auto')
+          } else {
+            $('.dialogue').html("har har very funny. It's a prayer closet.")
+          dialogueProgress = 4;
+          }
+        })
+
       });
     </script>
   </head>
