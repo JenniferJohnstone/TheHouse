@@ -26,6 +26,12 @@
         $(".cupboard").hover(function () {
           $(".goCup, .arrow").toggle();
           $(".arrow").toggleClass("arrow2");
+        }).click(function(){
+          $(".background").fadeOut(3000);
+            document.getElementById("footsteps").play();
+            setTimeout(function () {
+              window.location = "closet.html";
+            }, 3000);
         })
         ;
 
@@ -35,6 +41,9 @@
         });
 
         $(".kitchen").hover(function () {
+          if (sessionStorage.getItem('kitchen') == 'done') {
+            $('.kitchen').hide()
+          }
           $(".goKit, .arrow").toggle();
           $(".arrow").toggleClass("arrow3");
         })
@@ -63,7 +72,7 @@
       <div class="bedroom"></div>
       <p class="GoBed">Go to bedroom</p>
       <div class="cupboard"></div>
-      <p class="goCup">Go to cupbaord</p>
+      <p class="goCup">Go to closet</p>
       <div class="livingRoom"></div>
       <p class="goLiv">Go to living room</p>
       <div class="kitchen"></div>

@@ -4,8 +4,10 @@
     <script src="./jquery-3.6.0.min.js"></script>
     <script>
       $(document).ready(function () {
+        sessionStorage.setItem("kitchen", "done");
         var dialogueProgress = 0;
-        cluesFound = 0;
+        var cluesFound = 0;
+        var choiceProgress = 0;
 
         document.getElementById("kitchenTheme").play();
         document.getElementById("kitchenTheme").loop = true;
@@ -52,13 +54,63 @@
             $(".dialogue").html(
               "Whatever was in there, I don't think it was whiskey"
             );
+            cluesFound++;
+            clueCheck(cluesFound);
           }
           if (dialogueProgress == 6) {
-            cluesFound++;
-            clueCheck()
             $(".dialogue").hide();
             $(".reminder").show();
             $(".dialogueBox").css("pointer-events", "none");
+          }
+          if (dialogueProgress == 7) {
+            $(".dialogue").html(
+              "The blood looks still fresh, probably been a few hours maybe."
+            );
+          }
+          if (dialogueProgress == 8) {
+            $(".bloodySink").hide();
+            $(".dialogue").hide();
+            $(".reminder").html("search the room").show();
+            $(".dialogueBox").css("pointer-events", "none");
+            $(".jack").css("pointer-events", "auto").show();
+            dialogueProgress = 2;
+            cluesFound++;
+            clueCheck(cluesFound);
+          }
+          if (dialogueProgress == 9) {
+            $(".good, .bad").show();
+            $(".good").html(
+              "There's something else, I found some blood in the sink. You're not injured are you?"
+            );
+            $(".bad").html("Yeah Yeah I'll get back to looking.");
+          }
+          if (dialogueProgress == 10) {
+            $(".dialogueBox, .dialogue").toggleClass("girlDialogue");
+            $(".dialogue").html(
+              "What happened to her? Why was she coughing up blood?"
+            );
+            cluesFound++;
+          }
+          if (dialogueProgress == 11) {
+            $(".dialogueBox, .dialogue").toggleClass("girlDialogue");
+            $(".dialogue").html(
+              "Maybe it was the drinking? I tried to tell her that whiskey was poison... She didn't listen."
+            );
+            addClue()
+          }
+          if (dialogueProgress == 12) {
+            $(".dialogueBox, .dialogue").toggleClass("girlDialogue");
+            $(".dialogue").html(
+              "I'm gonna go back to looking for that key. Stay calm okay?"
+            );
+          }
+          if (dialogueProgress == 13) {
+            document.getElementById("kitchenTheme").pause();
+            $(".iphone").slideUp();
+            $(".background").fadeOut(3000);
+            setTimeout(function () {
+              window.location = "hallway.html";
+            }, 3000);
           }
         });
 
@@ -78,22 +130,27 @@
             $(".dialogueBox, .dialogue").show();
             $(".reminder").hide();
             $(".dialogue").html("Oh my god. What happened?");
-            cluesFound++;
-            clueCheck()
+            dialogueProgress = 6;
+            $(".dialogueBox").css("pointer-events", "auto");
           }, 1000);
         });
 
         function clueCheck(cluesFound) {
+          console.log(cluesFound);
           if (cluesFound == 2) {
-            $(".calling, .ignoreCall, .recieveCall").show();
+            document.getElementById("kitchenTheme").pause();
+            setTimeout(function () {
+              $(".calling, .ignoreCall, .recieveCall").show();
               $(".dialogueBox").hide();
               document.getElementById("ringtone").play();
+            }, 1000);
           }
         }
 
-
         $(".recieveCall").click(function () {
+          $(".reminder, .jack, .sink").hide();
           document.getElementById("ringtone").pause();
+          document.getElementById("kitchenTheme").play();
           $(".calling, .recieveCall, .ignoreCall").hide();
           $(".iphone").show();
           $(".dialogueBox, .dialogue")
@@ -101,6 +158,13 @@
             .css("pointer-events", "auto")
             .show();
           $(".dialogue").html("Did you find the key?");
+          $(".good, .bad").show();
+          $(".good").html(
+            "Not yet, I'm looking. I need to ask you about something I did find however..."
+          );
+          $(".bad").html(
+            "Honestly it seems impossible to find anything in a house this messy."
+          );
         });
 
         $(".ignoreCall").click(function () {
@@ -113,6 +177,63 @@
           }, 2000);
         });
 
+        function addPoint(value) {
+          choiceProgress++;
+          if (value == "good") {
+            var point = parseInt(sessionStorage.getItem("goodCounter"));
+            point++;
+            sessionStorage.setItem("goodCounter", point);
+          }
+          if (value == "bad") {
+            var point = parseInt(sessionStorage.getItem("badCounter"));
+            point++;
+            sessionStorage.setItem("badCounter", point);
+          }
+        }
+
+        function addClue() {
+          var clues = sessionStorage.getItem("cluesFound");
+          if (clues == null) {
+            sessionStorage.setItem("cluesFound", "1");
+          } else {
+            clues = parseInt(clues);
+            clues++;
+            sessionStorage.setItem("cluesFound", clues);
+          }
+        }
+
+        $(".good").click(function () {
+          $(".good, .bad").hide();
+          addPoint("good");
+          if (choiceProgress == 2) {
+            $(".dialogue, .dialogueBox").toggleClass("girlDialogue");
+            $(".dialogue").html(
+              "Oh no I'm...I'm okay just... really tired of this room. The blood must be mothers."
+            );
+          } else {
+            $(".good, .bad").hide();
+            $(".dialogue, .dialogueBox").toggleClass("girlDialogue");
+            $(".dialogue").html(
+              "I know it's the mess but I believe in you. It's got to be there somewhere right?"
+            );
+            dialogueProgress = 8;
+          }
+        });
+        $(".bad").click(function () {
+          addPoint("bad");
+          $(".good, .bad").hide();
+
+          console.log(choiceProgress);
+          if (choiceProgress == 2) {
+            $(".dialogue").html("Please hurry. I'm going crazy in here.");
+            dialogueProgress = 12;
+          } else {
+            $(".dialogue").html(
+              "Bit hard to clean when when I'M LOCKED IN A ROOM."
+            );
+            dialogueProgress = 8;
+          }
+        });
       });
     </script>
   </head>
@@ -131,8 +252,8 @@
     </audio>
 
     <audio id="ringtone">
-        <source src="sound/ringTone.mp3" />
-      </audio>
+      <source src="sound/ringTone.mp3" />
+    </audio>
 
     <div class="background">
       <img class="jack" src="./images/jack.png" />
@@ -142,6 +263,8 @@
       <img class="calling" src="images/incomingCall.png" />
       <div class="ignoreCall"></div>
       <div class="recieveCall"></div>
+      <p class="good"></p>
+      <p class="bad"></p>
       <div class="dialogueBox">
         <p class="dialogue"></p>
         <p class="reminder"></p>

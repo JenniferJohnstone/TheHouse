@@ -1,0 +1,114 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="kitchen.css" />
+    <link rel="stylesheet" href="closet.css" />
+    <script src="./jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        var dialogueProgress = 0;
+
+        $(".dialogueBox").show();
+        $(".dialogue").html("An empty closet...");
+
+        $(".dialogueBox").click(function () {
+          dialogueProgress++;
+          console.log(dialogueProgress);
+          if (dialogueProgress == 1) {
+            $(".dialogueBox").hide();
+            $(".maga").show();
+          }
+          if (dialogueProgress == 2) {
+            $(".dialogue").html("I wonder why");
+          }
+          if (dialogueProgress == 3) {
+            $(".dialogueBox").hide();
+            $(".verse").show();
+          }
+          if (dialogueProgress == 4) {
+              document.getElementById("closetTheme").pause();
+              setTimeout(function () {
+                $(".calling, .ignoreCall, .recieveCall").show();
+                $(".dialogueBox").hide();
+                document.getElementById("ringtone").play();
+              }, 1000);
+          }
+        });
+
+        document.getElementById("closetTheme").play();
+
+        $(".maga").click(function () {
+          document.getElementById("wood").play();
+          $(".dialogueBox").show();
+          $(".dialogue").html(
+            "There seems to be some magazines stuffed behind this board."
+          );
+        });
+
+        $(".verse").click(function () {
+          $(".dialogueBox").show();
+          $(".dialogue").html("Hmm. Odd they didn't write out the verse.");
+        });
+
+        $(".recieveCall").click(function () {
+          $(".reminder, .jack, .sink").hide();
+          document.getElementById("ringtone").pause();
+          document.getElementById("kitchenTheme").play();
+          $(".calling, .recieveCall, .ignoreCall").hide();
+          $(".iphone").show();
+          $(".dialogueBox, .dialogue")
+            .toggleClass("girlDialogue")
+            .css("pointer-events", "auto")
+            .show();
+          $(".dialogue").html("Did you find the key?");
+          $(".good, .bad").show();
+          $(".good").html(
+            "Not yet, I'm looking. I need to ask you about something I did find however..."
+          );
+          $(".bad").html(
+            "Honestly it seems impossible to find anything in a house this messy."
+          );
+        });
+
+        $(".ignoreCall").click(function () {
+          document.getElementById("ringtone").pause();
+          document.getElementById("ringtone").currentTime = 0;
+          $(".calling").hide();
+          setTimeout(function () {
+            document.getElementById("ringtone").play();
+            $(".calling").show();
+          }, 2000);
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <audio id="closetTheme">
+      <source src="/sound/forthecloset.mp3" />
+    </audio>
+
+    <audio id="wood">
+      <source src="/sound/wood.mp3" />
+    </audio>
+
+    <audio id="ringtone">
+      <source src="sound/ringTone.mp3" />
+    </audio>
+
+    <div class="background">
+      <img class="room" src="/images/closet.png" />
+      <div class="maga"></div>
+      <div class="verse"></div>
+      <img class="iphone" src="/images/incomingCall.png" />
+      <img class="calling" src="images/incomingCall.png" />
+      <div class="ignoreCall"></div>
+      <div class="recieveCall"></div>
+      <p class="good"></p>
+      <p class="bad"></p>
+      <div class="dialogueBox">
+        <p class="dialogue"></p>
+        <p class="reminder"></p>
+      </div>
+    </div>
+  </body>
+</html>

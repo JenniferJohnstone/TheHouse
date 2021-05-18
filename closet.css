@@ -1,0 +1,28 @@
+.background{
+    background-image: none;
+    background-color: black;
+}
+
+.room{
+    height: 650px;
+}
+
+.maga {
+    width: 300px;
+    height: 40px;
+    position: absolute;
+    left: 440px;
+    bottom: 100px;
+    cursor: pointer;
+    display: none;
+}
+
+.verse{
+    width: 200px;
+    height: 70px;
+    position: absolute;
+    left: 540px;
+    top: 270px;
+    display: none;
+    cursor: pointer;
+}

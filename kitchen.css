@@ -59,9 +59,12 @@ body {
 }
 
 .bloodySink{
+    left: 0;
+    position: absolute;
     width:1200px;
     height: 650px;
     display: none;
+    z-index: 0;
 }
 
 .iphone {
@@ -75,7 +78,7 @@ body {
 
 .calling {
     position: absolute; 
-    z-index: 0;
+    z-index: 1;
     width: 400px;
     left: 400px;
     height: 750px;
@@ -122,3 +125,25 @@ body {
     right: -19px;
     top: 5px;
   }
+
+  .good, .bad {
+    position: absolute;
+    top: 100px;
+    left: 310px;
+    background-color: white;
+    color: black;
+    font-size: 20px;
+    width: 200px;
+    padding: 10px;
+    display: none;
+}
+
+.good:hover, .bad:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+.bad{
+    left: 690px;
+}
