@@ -70,6 +70,7 @@
           if(dialogueProgress == 10){
             $(".dialogue, .dialogueBox").toggleClass("girlDialogue")
             $('.dialogue').html("Oh uh... nevermind. I'll let you get back to looking for the key. Good luck!")
+            addClue()
             dialogueProgress = 12;
           }
           if(dialogueProgress == 11){

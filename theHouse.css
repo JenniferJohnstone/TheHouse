@@ -108,11 +108,12 @@ body {
     z-index: 0;
     width: 400px;
     left: 400px;
-    height: 750px;
+    height: 650px;
     display: none;
 }
 
 .ignoreCall {
+    background-color: red;
     position: absolute;
     width: 100px;
     height: 100px;

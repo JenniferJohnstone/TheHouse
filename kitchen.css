@@ -81,7 +81,7 @@ body {
     z-index: 1;
     width: 400px;
     left: 400px;
-    height: 750px;
+    height: 650px;
     display: none;
 }
 
@@ -91,7 +91,7 @@ body {
     height: 100px;
     z-index: 2;
     left: 645px;
-    top: 525px;
+    top: 455px;
     display: none;
 
 }
@@ -102,7 +102,7 @@ body {
     height: 100px;
     z-index: 2;
     left: 450px;
-    top: 525px;
+    top: 455px;
     display: none;
 }
 
