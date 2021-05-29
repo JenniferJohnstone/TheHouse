@@ -5,10 +5,28 @@
     <script>
       $(document).ready(function () {
         document.getElementById("hallwayAmbience").play();
+        var dialogueProgress = 0;
+
+        if (sessionStorage.getItem("hasKey") == "done") {
+          console.log("they have the key!");
+          $(".dialogueBox").show();
+          $(".dialogue")
+            .html("Wow this is it, I'm finally going to meet this girl.")
+            .show();
+          $(".bedroom, .cupboard, .livingRoom, .kitchen").hide();
+        }
+
+        $(".dialogueBox").click(function () {
+          dialogueProgress++;
+          if (dialogueProgress == 1) {
+            $(".dialogue").html("Is this right thing to do?");
+            $(".reminder").show().html("should you open the door?");
+          }
+        });
 
         $(".bedroom")
           .hover(function () {
-            if (sessionStorage.getItem('bedroom') == 'done') {
+            if (sessionStorage.getItem("bedroom") == "done") {
               $(".bedroom").hide();
             } else {
               $(".goBed, .arrow").toggle();
@@ -23,46 +41,50 @@
             }, 3000);
           });
 
-        $(".cupboard").hover(function () {
-          if(sessionStorage.getItem('closet') == 'done'){
-            $('.cupboard').hide()
-          }
-          $(".goCup, .arrow").toggle();
-          $(".arrow").toggleClass("arrow2");
-        }).click(function(){
-          $(".background").fadeOut(3000);
+        $(".cupboard")
+          .hover(function () {
+            if (sessionStorage.getItem("closet") == "done") {
+              $(".cupboard").hide();
+            }
+            $(".goCup, .arrow").toggle();
+            $(".arrow").toggleClass("arrow2");
+          })
+          .click(function () {
+            $(".background").fadeOut(3000);
             document.getElementById("footsteps").play();
             setTimeout(function () {
               window.location = "closet.html";
             }, 3000);
-        })
-        ;
+          });
 
-        $(".livingRoom").hover(function () {
-          $(".goLiv, .arrow").toggle();
-          $(".arrow").toggleClass("arrow2");
-        }).click(function(){
-          $(".background").fadeOut(3000);
+        $(".livingRoom")
+          .hover(function () {
+            $(".goLiv, .arrow").toggle();
+            $(".arrow").toggleClass("arrow2");
+          })
+          .click(function () {
+            $(".background").fadeOut(3000);
             document.getElementById("footsteps").play();
             setTimeout(function () {
               window.location = "livingRoom.html";
             }, 3000);
-        });
+          });
 
-        $(".kitchen").hover(function () {
-          if (sessionStorage.getItem('kitchen') == 'done') {
-            $('.kitchen').hide()
-          }
-          $(".goKit, .arrow").toggle();
-          $(".arrow").toggleClass("arrow3");
-        })
-        .click(function () {
+        $(".kitchen")
+          .hover(function () {
+            if (sessionStorage.getItem("kitchen") == "done") {
+              $(".kitchen").hide();
+            }
+            $(".goKit, .arrow").toggle();
+            $(".arrow").toggleClass("arrow3");
+          })
+          .click(function () {
             $(".background").fadeOut(3000);
             document.getElementById("footsteps").play();
             setTimeout(function () {
               window.location = "kitchen.html";
             }, 3000);
-          });;
+          });
       });
     </script>
   </head>

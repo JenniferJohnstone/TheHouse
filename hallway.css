@@ -1,88 +1,114 @@
 body {
-    text-align: center;
-    background-color: black;
+  text-align: center;
+  background-color: black;
 }
 
 .background {
-    position: relative; 
-    width: 1200px;
-    height: 650px;
-    border: 1px solid black;
-    margin-left: auto; 
-    margin-right: auto;
-    background-color: black;
-    background-image: url('./images/hallway.jpg');
-    background-size: cover;
+  position: relative;
+  width: 1200px;
+  height: 650px;
+  border: 1px solid black;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: black;
+  background-image: url("./images/hallway.jpg");
+  background-size: cover;
 }
 
-.arrow{
-    position: absolute;
-    width: 100px;
-    display: none;
+.arrow {
+  position: absolute;
+  width: 100px;
+  display: none;
 }
 
 .bedroom {
-    width: 130px;
-    height: 600px; 
-    position: absolute;
-    left: 800px;
-    cursor: pointer;
+  width: 130px;
+  height: 600px;
+  position: absolute;
+  left: 800px;
+  cursor: pointer;
 }
 
-.goBed, .goCup, .goLiv, .goKit{
-    display: none;
-    position: absolute;
-    color: white;
-    font-size: 50px;
-    left: 500px;
-    top: 200px;
+.goBed,
+.goCup,
+.goLiv,
+.goKit {
+  display: none;
+  position: absolute;
+  color: white;
+  font-size: 50px;
+  left: 500px;
+  top: 200px;
 }
 
 .cupBoard {
-    width: 30px;
-    height: 380px; 
-    position: absolute;
-    left: 480px;
-    top: 90px;
-    cursor: pointer;
+  width: 30px;
+  height: 380px;
+  position: absolute;
+  left: 480px;
+  top: 90px;
+  cursor: pointer;
 }
 
 .livingRoom {
-    width: 20px;
-    height: 290px; 
-    position: absolute;
-    left: 520px;
-    top: 150px;
-    cursor: pointer;
+  width: 20px;
+  height: 290px;
+  position: absolute;
+  left: 520px;
+  top: 150px;
+  cursor: pointer;
 }
 
 .kitchen {
-    width: 20px;
-    height: 260px; 
-    position: absolute;
-    left: 680px;
-    top: 170px;
-    cursor: pointer;
+  width: 20px;
+  height: 260px;
+  position: absolute;
+  left: 680px;
+  top: 170px;
+  cursor: pointer;
 }
 
 .goKit {
-    top: 300px;
-    left: 410px;
+  top: 300px;
+  left: 410px;
 }
 
-.arrow1, .arrow3 {
-    top: 200px;
-    display: none;
+.arrow1,
+.arrow3 {
+  top: 200px;
+  display: none;
 }
 
 .arrow2 {
-    top: 200px;
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
+  top: 200px;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
-.arrow3{
-    top: 300px;
-    left: 500px;
+.arrow3 {
+  top: 300px;
+  left: 500px;
 }
 
+.dialogue,
+.reminder {
+  color: black;
+  display: none;
+  font-size: 24px;
+}
+
+.reminder {
+  font-style: italic;
+  font-size: 14px;
+}
+
+.dialogueBox {
+  border-color: white;
+  border-width: 1px;
+  width: 800px;
+  background: rgba(117, 117, 117, 0.7) /* grey background with 30% opacity */;
+  position: absolute;
+  top: 530px;
+  left: 220px;
+  z-index: 8;
+}

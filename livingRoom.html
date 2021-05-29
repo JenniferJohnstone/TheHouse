@@ -7,115 +7,130 @@
       $(document).ready(function () {
         var dialogueProgress = 0;
 
-        document.getElementById('theme').play()
+        document.getElementById("theme").play();
 
-        setTimeout(function(){
-          $('.dialogueBox').show()
-          $('.dialogue').html('Well this looks rather homey.')
-        }, 1000)
-        
-        $('.dialogueBox').click(function(){
-          dialogueProgress++
-          if(dialogueProgress == 1){
-            $('.dialogue').hide()
-            $('.reminder').show().html('Search the room')
+        setTimeout(function () {
+          $(".dialogueBox").show();
+          $(".dialogue").html("Well this looks rather homey.");
+        }, 1000);
+
+        $(".dialogueBox").click(function () {
+          dialogueProgress++;
+          if (dialogueProgress == 1) {
+            $(".dialogue").hide();
+            $(".reminder").show().html("Search the room");
           }
-          if(dialogueProgress == 2){
-            $('.dialogue').html('What verse should I read?')
-            showVerses()
+          if (dialogueProgress == 2) {
+            $(".dialogue").html("What verse should I read?");
+            showVerses();
           }
-          if(dialogueProgress == 3){
-            $('.dialogue').html('hmmm... not every helpful.')
+          if (dialogueProgress == 3) {
+            $(".dialogue").html("hmmm... not every helpful.");
           }
-          if(dialogueProgress == 4){
-            $('.dialogue').html('Maybe a different one?')
-            dialogueProgress=1;
+          if (dialogueProgress == 4) {
+            $(".dialogue").html("Maybe a different one?");
+            dialogueProgress = 1;
           }
-        })
-
-        $('.bible').click(function(){
-          $('.dialogue').show().html('Ah yes the good book.')
-          $('.bible').fadeOut()
-          $('.reminder').hide()
-        })
-
-        function showVerses(){
-          if(sessionStorage.getItem("verseFound") == 'done'){
-            $('.open, .choice1, .choice2, .choice3, .choice4').fadeIn()
-          } else {
-            $('.open, .choice1, .choice2, .choice3').fadeIn()
+          if (dialogueProgress == 5) {
+            $(".dialogue").html("Time to get out here.");
           }
-        }
-
-        function hideVerses (){
-          document.getElementById('flip').play()
-          $('.open').fadeOut()
-          setTimeout(function(){
-            $('.open').fadeIn()
-          }, 500)
-          $('.choice1, .choice2, .choice3, .choice4').fadeOut()
-        }
-
-        $('.choice1').click(function(){
-          console.log('click')
-          hideVerses()
-          $('.dialogue').html('Cast all your anxiety on him because he cares for you. ')
-        })
-
-        $('.choice2').click(function(){
-          hideVerses()
-          $('.dialogue').html('but those who hope in the LORD will renew their strength. They will soar on wings like eagles; they will run and not grow weary, they will walk and not be faint.  ')
-        })
-        $('.choice3').click(function(){
-          hideVerses()
-          $('.dialogue').html('He replied, “Because you have so little faith. Truly I tell you, if you have faith as small as a mustard seed, you can say to this mountain, ‘Move from here to there,’ and it will move. Nothing will be impossible for you.” ')
-        })
-        $('.choice4').click(function(){
-          hideVerses()
-          $('.key').fadeIn()
-          $('.dialogue').html("Oh my god, is that what I think it is?")
-          document.getElementById('theme').pause()
-        })
-
-        $('.key').click(function(){
-          $('.key').fadeOut()
-          document.getElementById('victory').play()
-          $('.dialogue').html('YES! Finally!')
-        })
-
-        $('.goBack').click(function(){
-          $(".background").fadeOut(3000);
+          if (dialogueProgress == 6) {
+            $(".background").fadeOut(3000);
             setTimeout(function () {
               window.location = "hallway.html";
             }, 3000);
-        })
+          }
+        });
 
+        $(".bible").click(function () {
+          $(".dialogue").show().html("Ah yes the good book.");
+          $(".bible").fadeOut();
+          $(".reminder").hide();
+        });
+
+        function showVerses() {
+          if (sessionStorage.getItem("verseFound") == "done") {
+            $(".open, .choice1, .choice2, .choice3, .choice4").fadeIn();
+          } else {
+            $(".open, .choice1, .choice2, .choice3").fadeIn();
+          }
+        }
+
+        function hideVerses() {
+          document.getElementById("flip").play();
+          $(".open").fadeOut();
+          setTimeout(function () {
+            $(".open").fadeIn();
+          }, 500);
+          $(".choice1, .choice2, .choice3, .choice4").fadeOut();
+        }
+
+        $(".choice1").click(function () {
+          console.log("click");
+          hideVerses();
+          $(".dialogue").html(
+            "Cast all your anxiety on him because he cares for you. "
+          );
+        });
+
+        $(".choice2").click(function () {
+          hideVerses();
+          $(".dialogue").html(
+            "but those who hope in the LORD will renew their strength. They will soar on wings like eagles; they will run and not grow weary, they will walk and not be faint.  "
+          );
+        });
+        $(".choice3").click(function () {
+          hideVerses();
+          $(".dialogue").html(
+            "He replied, “Because you have so little faith. Truly I tell you, if you have faith as small as a mustard seed, you can say to this mountain, ‘Move from here to there,’ and it will move. Nothing will be impossible for you.” "
+          );
+        });
+        $(".choice4").click(function () {
+          hideVerses();
+          $(".key").fadeIn();
+          $(".dialogue").html("Oh my god, is that what I think it is?");
+          document.getElementById("theme").pause();
+        });
+
+        $(".key").click(function () {
+          $(".key").fadeOut();
+          document.getElementById("victory").play();
+          $(".dialogue").html("YES! Finally!");
+          sessionStorage.setItem("hasKey", "done");
+          dialogueProgress = 4;
+        });
+
+        $(".goBack").click(function () {
+          $(".background").fadeOut(3000);
+          setTimeout(function () {
+            window.location = "hallway.html";
+          }, 3000);
+        });
       });
     </script>
   </head>
   <body>
     <div class="background">
-
-      <audio id='theme'>
-        <source src='/sound/Tonight You Belong to Me - Creepy Version.mp3' />
+      <audio id="theme">
+        <source src="/sound/Tonight You Belong to Me - Creepy Version.mp3" />
       </audio>
 
-      <audio id='flip'>
-        <source src='/sound/Book Flipping Sound Effect.mp3' />
+      <audio id="flip">
+        <source src="/sound/Book Flipping Sound Effect.mp3" />
       </audio>
 
-      <audio id='victory'>
-        <source src='/sound/Victory sound effect.mp3' />
+      <audio id="victory">
+        <source src="/sound/Victory sound effect.mp3" />
       </audio>
 
-        <img class="bible" src='/images/bible.png'/>
-        <img class="open" src='/images/openBible.png' />
-        <img class="key" src='/images/key.png' />
-        <p class='choice1'>1 Peter 5:7</p>
-        <p class='choice2'>Isiah 40:31</p>
-        <p class='choice3'>Matthew 17:20</p>
-        <p class='choice4'>James 2: 10</p>
-        <p class='goBack'>Go back</p>
+      <img class="bible" src="/images/bible.png" />
+      <img class="open" src="/images/openBible.png" />
+      <img class="key" src="/images/key.png" />
+      <p class="choice1">1 Peter 5:7</p>
+      <p class="choice2">Isiah 40:31</p>
+      <p class="choice3">Matthew 17:20</p>
+      <p class="choice4">James 2: 10</p>
+      <p class="goBack">Go back</p>
       <div class="dialogueBox">
         <p class="dialogue"></p>
         <p class="reminder"></p>
