@@ -1,6 +1,7 @@
 body {
     text-align: center;
     background-color: black;
+    user-select: none;
 }
 
 
@@ -113,13 +114,12 @@ body {
 }
 
 .ignoreCall {
-    background-color: red;
     position: absolute;
     width: 100px;
     height: 100px;
     z-index: 2;
     left: 645px;
-    top: 525px;
+    top: 450px;
     display: none;
 
 }
@@ -130,7 +130,7 @@ body {
     height: 100px;
     z-index: 2;
     left: 450px;
-    top: 525px;
+    top: 450px;
     display: none;
 }
 

@@ -83,6 +83,7 @@
               "There's something else, I found some blood in the sink. You're not injured are you?"
             );
             $(".bad").html("Yeah Yeah I'll get back to looking.");
+            $(".dialogueBox").css("pointer-events", "none");
           }
           if (dialogueProgress == 10) {
             $(".dialogueBox, .dialogue").toggleClass("girlDialogue");
@@ -155,7 +156,7 @@
           $(".iphone").show();
           $(".dialogueBox, .dialogue")
             .toggleClass("girlDialogue")
-            .css("pointer-events", "auto")
+            .css("pointer-events", "none")
             .show();
           $(".dialogue").html("Did you find the key?");
           $(".good, .bad").show();
@@ -206,16 +207,17 @@
           $(".good, .bad").hide();
           addPoint("good");
           if (choiceProgress == 2) {
-            $(".dialogue, .dialogueBox").toggleClass("girlDialogue");
             $(".dialogue").html(
               "Oh no I'm...I'm okay just... really tired of this room. The blood must be mothers."
             );
+            $(".dialogueBox").css("pointer-events", "auto");
+
           } else {
             $(".good, .bad").hide();
-            $(".dialogue, .dialogueBox").toggleClass("girlDialogue");
             $(".dialogue").html(
               "I know it's the mess but I believe in you. It's got to be there somewhere right?"
             );
+            $(".dialogueBox").css("pointer-events", "auto");
             dialogueProgress = 8;
           }
         });
@@ -226,11 +228,13 @@
           console.log(choiceProgress);
           if (choiceProgress == 2) {
             $(".dialogue").html("Please hurry. I'm going crazy in here.");
+            $(".dialogueBox").css("pointer-events", "auto");
             dialogueProgress = 12;
           } else {
             $(".dialogue").html(
               "Bit hard to clean when when I'M LOCKED IN A ROOM."
             );
+            $(".dialogueBox").css("pointer-events", "auto");
             dialogueProgress = 8;
           }
         });

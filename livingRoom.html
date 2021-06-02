@@ -19,6 +19,7 @@
           if(dialogueProgress == 1){
             $('.dialogue').hide()
             $('.reminder').show().html('Search the room')
+            $(".dialogueBox").css("pointer-events", "none");
           }
           if(dialogueProgress == 2){
             $('.dialogue').html('What verse should I read?')
@@ -31,12 +32,22 @@
             $('.dialogue').html('Maybe a different one?')
             dialogueProgress=1;
           }
+          if(dialogueProgress == 5){
+            $('.dialogue').html('Time to get out of here!')
+          }
+          if(dialogueProgress == 6){
+            $(".background").fadeOut(3000);
+            setTimeout(function () {
+              window.location = "hallway.html";
+            }, 3000);
+          }
         })
 
         $('.bible').click(function(){
           $('.dialogue').show().html('Ah yes the good book.')
           $('.bible').fadeOut()
           $('.reminder').hide()
+          $(".dialogueBox").css("pointer-events", "auto");
         })
 
         function showVerses(){
@@ -74,13 +85,17 @@
           hideVerses()
           $('.key').fadeIn()
           $('.dialogue').html("Oh my god, is that what I think it is?")
+          $(".dialogueBox").css("pointer-events", "none");
           document.getElementById('theme').pause()
         })
 
         $('.key').click(function(){
           $('.key').fadeOut()
           document.getElementById('victory').play()
+          sessionStorage.setItem("foundKey", "done");
           $('.dialogue').html('YES! Finally!')
+          $(".dialogueBox").css("pointer-events", "auto");
+          dialogueProgress = 4;
         })
 
         $('.goBack').click(function(){

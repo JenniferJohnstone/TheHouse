@@ -1,14 +1,170 @@
 <html>
   <head>
+    <link rel="stylesheet" href="kitchen.css" />
     <link rel="stylesheet" href="hallway.css" />
     <script src="./jquery-3.6.0.min.js"></script>
     <script>
       $(document).ready(function () {
-        document.getElementById("hallwayAmbience").play();
+        var dialogueProgress = 0;
+        if (sessionStorage.getItem("foundKey") == "done") {
+          document.getElementById("endOftheHall").play();
+          $(".dialogueBox").show();
+          $(".dialogue").html(
+            "I'm finally here. But I'm...I'm not sure I should do this."
+          );
+        } else {
+          document.getElementById("hallwayAmbience").play();
+        }
+
+        $(".dialogueBox").click(function () {
+          dialogueProgress++;
+          if (dialogueProgress == 1) {
+            $(".dialogue").html(
+              "Something doesn't feel right, I don't know this girl... maybe I should get help."
+            );
+          }
+          if (dialogueProgress == 2) {
+            $(".dialogueBox").css("pointer-events", "none");
+            $(".choices").fadeIn(3000);
+          }
+          if (dialogueProgress == 3) {
+            if (sessionStorage.getItem("goodCounter") >= 4) {
+              $(".figure").css("filter", "brightness(1)");
+              $(".dialogue").html("You saved me!");
+              document.getElementById("happyEnding").play();
+            }
+          }
+          if (dialogueProgress == 4) {
+            $(".figure, .backBed, .dialogueBox").fadeOut(3000);
+            setTimeout(function () {
+              $(".ending").html(
+                "I'll always remember it as the day my life changed forever."
+              );
+              $(".ending").fadeIn(6000).delay(3000).fadeOut(2000);
+            }, 3000);
+            setTimeout(function () {
+              $(".because").html(
+                "Because that day I learnt how a new friend can be found in the most unexpected ways. "
+              );
+              $(".because").fadeIn(6000).fadeOut(2000);
+            }, 6000);
+            setTimeout(function () {
+              $(".final").html("The End");
+              $(".final").fadeIn(6000).delay(3000).fadeOut(2000);
+            }, 12000);
+            setTimeout(function () {
+              window.location = "index.html";
+            }, 40000);
+          }
+
+          if(dialogueProgress == 5){
+            $(".dialogue").html("You took your time.");
+          }
+          if(dialogueProgress == 6){
+            document.getElementById("breathing").pause();
+            $('.badEnd').css("filter", "brightness(1)");
+            document.getElementById("heartbeat").pause();
+            setTimeout(function(){
+              $('.background').hide()
+              $('body').css('background-color', 'red')
+              document.getElementById("scream").play();
+              setTimeout(function) 
+              //play the song 
+            }, 500)
+          }
+
+        });
+
+        $(".choice1").hover(function () {
+          $(".dialogue").html(
+            "This girl is innocent and needs help. She trusts me."
+          );
+        });
+
+        $(".choice1").click(function () {
+          $(".background").fadeOut(2000);
+          document.getElementById("footsteps").play();
+          setTimeout(function () {
+            $(".atTheDoor").fadeIn(3000);
+            $(".background").css("background-image", "none");
+            $(".background, .endDoorHandle").show();
+            $(".choices, .dialogueBox").hide();
+          }, 2500);
+        });
+
+        $(".choice2").hover(function () {
+          $(".dialogue").html(
+            "After everything I've seen in this house I know I'm way over my head. This girl is dangerous."
+          );
+        });
+
+        $(".endDoorHandle").click(function () {
+          document.getElementById("endOftheHall").pause();
+          document.getElementById("open").play();
+          $(".background").hide();
+          if (sessionStorage.getItem("goodCounter") >= 4) {
+            // good ending 
+            setTimeout(function () {
+              document.getElementById("door").play();
+              $(".atTheDoor, .endDoorHandle").hide();
+              $(".backBed, .figure, .cover, .background").show();
+              $(".cover").animate(
+                {
+                  width: 0,
+                },
+                5000,
+                "swing"
+              );
+            }, 1000);
+            setTimeout(function () {
+              $(".dialogueBox, .dialogue").show().toggleClass("girlDialogue");
+              $(".dialogue").html("you...");
+              $(".dialogueBox").css("pointer-events", "auto");
+            }, 6000);
+          } else
+          // bad ending 
+          {
+            setTimeout(function () {
+              document.getElementById("door").play();
+              $(".atTheDoor, .endDoorHandle").hide();
+              $(".backBed, .badEnd, .cover, .background").show();
+              $(".cover").animate(
+                {
+                  width: 0,
+                },
+                5000,
+                "swing"
+              );
+              setTimeout(function () {
+                document.getElementById("footsteps").play();
+                document.getElementById("breathing").play();
+                $(".badEnd").animate(
+                  {
+                    width: "+=1000",
+                    height: "+=1000",
+                    left: "-=600",
+                  },
+                  {
+                    duration: 6000,
+                    complete: function () {
+                      $(".dialogueBox, .dialogue")
+                        .show()
+                        .toggleClass("girlDialogue");
+                      $(".dialogue").html("you...");
+                      document.getElementById("heartbeat").play();
+                      dialogueProgress = 4;
+                      $(".dialogueBox").css("pointer-events", "auto");
+                    },
+                  }
+                );
+              }, 3000);
+            }, 1000);
+          }
+        });
 
         $(".bedroom")
           .hover(function () {
-            if (sessionStorage.getItem('bedroom') == 'done') {
+            if (sessionStorage.getItem("bedroom") == "done") {
               $(".bedroom").hide();
             } else {
               $(".goBed, .arrow").toggle();
@@ -23,46 +179,53 @@
             }, 3000);
           });
 
-        $(".cupboard").hover(function () {
-          if(sessionStorage.getItem('closet') == 'done'){
-            $('.cupboard').hide()
-          }
-          $(".goCup, .arrow").toggle();
-          $(".arrow").toggleClass("arrow2");
-        }).click(function(){
-          $(".background").fadeOut(3000);
+        $(".cupboard")
+          .hover(function () {
+            if (sessionStorage.getItem("closet") == "done") {
+              $(".cupboard").hide();
+            }
+            $(".goCup, .arrow").toggle();
+            $(".arrow").toggleClass("arrow2");
+          })
+          .click(function () {
+            $(".background").fadeOut(3000);
             document.getElementById("footsteps").play();
             setTimeout(function () {
               window.location = "closet.html";
             }, 3000);
-        })
-        ;
+          });
 
-        $(".livingRoom").hover(function () {
-          $(".goLiv, .arrow").toggle();
-          $(".arrow").toggleClass("arrow2");
-        }).click(function(){
-          $(".background").fadeOut(3000);
+        $(".livingRoom")
+          .hover(function () {
+            if (sessionStorage.getItem("foundKey") == "done") {
+              $(".livingRoom").hide();
+            }
+            $(".goLiv, .arrow").toggle();
+            $(".arrow").toggleClass("arrow2");
+          })
+          .click(function () {
+            $(".background").fadeOut(3000);
             document.getElementById("footsteps").play();
             setTimeout(function () {
               window.location = "livingRoom.html";
             }, 3000);
-        });
+          });
 
-        $(".kitchen").hover(function () {
-          if (sessionStorage.getItem('kitchen') == 'done') {
-            $('.kitchen').hide()
-          }
-          $(".goKit, .arrow").toggle();
-          $(".arrow").toggleClass("arrow3");
-        })
-        .click(function () {
+        $(".kitchen")
+          .hover(function () {
+            if (sessionStorage.getItem("kitchen") == "done") {
+              $(".kitchen").hide();
+            }
+            $(".goKit, .arrow").toggle();
+            $(".arrow").toggleClass("arrow3");
+          })
+          .click(function () {
             $(".background").fadeOut(3000);
             document.getElementById("footsteps").play();
             setTimeout(function () {
               window.location = "kitchen.html";
             }, 3000);
-          });;
+          });
       });
     </script>
   </head>
@@ -72,11 +235,50 @@
       <source src="sound/FNAF Ambience Extended.mp3" />
     </audio>
 
+    <audio id="endOftheHall">
+      <source src="sound/end of the hall.mp3" />
+    </audio>
     <audio id="footsteps">
       <source src="sound/Footsteps - Sound Effect.mp3" />
     </audio>
 
+    <audio id="open">
+      <source src="sound/Door opening Sound Effect HD.mp3" />
+    </audio>
+
+    <audio id="door">
+      <source src="sound/squeakydoor.mp3" />
+    </audio>
+
+    <audio id="happyEnding">
+      <source src="sound/happy ending music.mp3" />
+    </audio>
+
+    <audio id="breathing">
+      <source src="sound/Woman Breathing Heavily (HD).mp3" />
+    </audio>
+
+    <audio id="scream">
+      <source src='sound/scream.mp3' />
+    </audio>
+
+    <audio id="heartbeat">
+      <source src="sound/heartbeat.mp3" />
+    </audio>
+
+    <audio id='theme'>
+      <source src='/sound/Tonight You Belong to Me - Creepy Version.mp3' />
+    </audio>
+
+
+    <!-- up to creating the good ending -->
     <div class="background">
+      <div class="cover"></div>
+      <img class="figure" src="/images/lilgirlhappy.png" />
+      <img class="badEnd" src="/images/spookygirl.png" />
+      <img class="backBed" src="/images/bedroom.jpg" />
+      <img class="atTheDoor" src="images/spooky door.png" />
+      <div class="endDoorHandle"></div>
       <img class="arrow" src="./images/arrow.png" />
       <div class="bedroom"></div>
       <p class="GoBed">Go to bedroom</p>
@@ -90,6 +292,13 @@
         <p class="dialogue"></p>
         <p class="reminder"></p>
       </div>
+      <div class="choices">
+        <p class="choice1">Open the door</p>
+        <p class="choice2">Call the police</p>
+      </div>
+      <p class="ending"></p>
+      <p class="because"></p>
+      <p class="final"></p>
     </div>
   </body>
 </html>
