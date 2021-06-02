@@ -80,7 +80,7 @@
           if (dialogueProgress == 9) {
             $(".good, .bad").show();
             $(".good").html(
-              "There's something else, I found some blood in the sink. You're not injured are you?"
+              "It's not that, I found some blood in the sink. You're not injured are you?"
             );
             $(".bad").html("Yeah Yeah I'll get back to looking.");
             $(".dialogueBox").css("pointer-events", "none");
@@ -97,7 +97,7 @@
             $(".dialogue").html(
               "Maybe it was the drinking? I tried to tell her that whiskey was poison... She didn't listen."
             );
-            addClue()
+            addClue();
           }
           if (dialogueProgress == 12) {
             $(".dialogueBox, .dialogue").toggleClass("girlDialogue");

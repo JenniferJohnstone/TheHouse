@@ -7,8 +7,9 @@
       $(document).ready(function () {
         var dialogueProgress = 0;
 
-        document.getElementById('theme').play()
+        document.getElementById("theme").play();
 
+<<<<<<< HEAD
         setTimeout(function(){
           $('.dialogueBox').show()
           $('.dialogue').html('Well this looks rather homey.')
@@ -20,18 +21,40 @@
             $('.dialogue').hide()
             $('.reminder').show().html('Search the room')
             $(".dialogueBox").css("pointer-events", "none");
+=======
+        setTimeout(function () {
+          $(".dialogueBox").show();
+          $(".dialogue").html("Well this looks rather homey.");
+        }, 1000);
+
+        $(".dialogueBox").click(function () {
+          dialogueProgress++;
+          if (dialogueProgress == 1) {
+            $(".dialogue").hide();
+            $(".reminder").show().html("Search the room");
           }
-          if(dialogueProgress == 2){
-            $('.dialogue').html('What verse should I read?')
-            showVerses()
+          if (dialogueProgress == 2) {
+            $(".dialogue").html("What verse should I read?");
+            showVerses();
           }
-          if(dialogueProgress == 3){
-            $('.dialogue').html('hmmm... not every helpful.')
+          if (dialogueProgress == 3) {
+            $(".dialogue").html("hmmm... not every helpful.");
+>>>>>>> ce90c7e5cc610e0224ed8760a281d871310f5df8
           }
-          if(dialogueProgress == 4){
-            $('.dialogue').html('Maybe a different one?')
-            dialogueProgress=1;
+          if (dialogueProgress == 4) {
+            $(".dialogue").html("Maybe a different one?");
+            dialogueProgress = 1;
           }
+          if (dialogueProgress == 5) {
+            $(".dialogue").html("Time to get out here.");
+          }
+          if (dialogueProgress == 6) {
+            $(".background").fadeOut(3000);
+            setTimeout(function () {
+              window.location = "hallway.html";
+            }, 3000);
+          }
+<<<<<<< HEAD
           if(dialogueProgress == 5){
             $('.dialogue').html('Time to get out of here!')
           }
@@ -49,29 +72,40 @@
           $('.reminder').hide()
           $(".dialogueBox").css("pointer-events", "auto");
         })
+=======
+        });
 
-        function showVerses(){
-          if(sessionStorage.getItem("verseFound") == 'done'){
-            $('.open, .choice1, .choice2, .choice3, .choice4').fadeIn()
+        $(".bible").click(function () {
+          $(".dialogue").show().html("Ah yes the good book.");
+          $(".bible").fadeOut();
+          $(".reminder").hide();
+        });
+>>>>>>> ce90c7e5cc610e0224ed8760a281d871310f5df8
+
+        function showVerses() {
+          if (sessionStorage.getItem("verseFound") == "done") {
+            $(".open, .choice1, .choice2, .choice3, .choice4").fadeIn();
           } else {
-            $('.open, .choice1, .choice2, .choice3').fadeIn()
+            $(".open, .choice1, .choice2, .choice3").fadeIn();
           }
         }
 
-        function hideVerses (){
-          document.getElementById('flip').play()
-          $('.open').fadeOut()
-          setTimeout(function(){
-            $('.open').fadeIn()
-          }, 500)
-          $('.choice1, .choice2, .choice3, .choice4').fadeOut()
+        function hideVerses() {
+          document.getElementById("flip").play();
+          $(".open").fadeOut();
+          setTimeout(function () {
+            $(".open").fadeIn();
+          }, 500);
+          $(".choice1, .choice2, .choice3, .choice4").fadeOut();
         }
 
-        $('.choice1').click(function(){
-          console.log('click')
-          hideVerses()
-          $('.dialogue').html('Cast all your anxiety on him because he cares for you. ')
-        })
+        $(".choice1").click(function () {
+          console.log("click");
+          hideVerses();
+          $(".dialogue").html(
+            "Cast all your anxiety on him because he cares for you. "
+          );
+        });
 
         $('.choice2').click(function(){
           hideVerses()
@@ -98,39 +132,37 @@
           dialogueProgress = 4;
         })
 
-        $('.goBack').click(function(){
+        $(".goBack").click(function () {
           $(".background").fadeOut(3000);
-            setTimeout(function () {
-              window.location = "hallway.html";
-            }, 3000);
-        })
-
+          setTimeout(function () {
+            window.location = "hallway.html";
+          }, 3000);
+        });
       });
     </script>
   </head>
   <body>
     <div class="background">
-
-      <audio id='theme'>
-        <source src='/sound/Tonight You Belong to Me - Creepy Version.mp3' />
+      <audio id="theme">
+        <source src="/sound/Tonight You Belong to Me - Creepy Version.mp3" />
       </audio>
 
-      <audio id='flip'>
-        <source src='/sound/Book Flipping Sound Effect.mp3' />
+      <audio id="flip">
+        <source src="/sound/Book Flipping Sound Effect.mp3" />
       </audio>
 
-      <audio id='victory'>
-        <source src='/sound/Victory sound effect.mp3' />
+      <audio id="victory">
+        <source src="/sound/Victory sound effect.mp3" />
       </audio>
 
-        <img class="bible" src='/images/bible.png'/>
-        <img class="open" src='/images/openBible.png' />
-        <img class="key" src='/images/key.png' />
-        <p class='choice1'>1 Peter 5:7</p>
-        <p class='choice2'>Isiah 40:31</p>
-        <p class='choice3'>Matthew 17:20</p>
-        <p class='choice4'>James 2: 10</p>
-        <p class='goBack'>Go back</p>
+      <img class="bible" src="/images/bible.png" />
+      <img class="open" src="/images/openBible.png" />
+      <img class="key" src="/images/key.png" />
+      <p class="choice1">1 Peter 5:7</p>
+      <p class="choice2">Isiah 40:31</p>
+      <p class="choice3">Matthew 17:20</p>
+      <p class="choice4">James 2: 10</p>
+      <p class="goBack">Go back</p>
       <div class="dialogueBox">
         <p class="dialogue"></p>
         <p class="reminder"></p>
