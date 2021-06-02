@@ -8,7 +8,7 @@
         var dialogueProgress = 0;
         if (sessionStorage.getItem("foundKey") == "done") {
           document.getElementById("endOftheHall").play();
-          $(".dialogueBox").show();
+          $(".dialogueBox, .dialogue").show();
           $(".dialogue").html(
             "I'm finally here. But I'm...I'm not sure I should do this."
           );
@@ -57,22 +57,34 @@
             }, 40000);
           }
 
-          if(dialogueProgress == 5){
+          if (dialogueProgress == 5) {
             $(".dialogue").html("You took your time.");
           }
-          if(dialogueProgress == 6){
+          if (dialogueProgress == 6) {
             document.getElementById("breathing").pause();
-            $('.badEnd').css("filter", "brightness(1)");
+            $(".badEnd").css("filter", "brightness(1)");
             document.getElementById("heartbeat").pause();
-            setTimeout(function(){
-              $('.background').hide()
-              $('body').css('background-color', 'red')
+            setTimeout(function () {
+              $(".badEnd, .backBed, .dialogueBox").hide();
+              $(".finalCurtain")
+                .css({
+                  width: "100vw",
+                  height: "100vh",
+                  backgroundColor: "red",
+                })
+                .show();
+              $("body").css("background-color", "black");
               document.getElementById("scream").play();
-              setTimeout(function) 
-              //play the song 
-            }, 500)
+              setTimeout(function () {
+                document.getElementById("badEnd").play();
+                $(".finalCurtain").fadeOut(3000);
+                setTimeout(function () {
+                  $(".final").html("The End");
+                  $(".final").fadeIn(6000).delay(3000).fadeOut(2000);
+                }, 4000);
+              }, 2000);
+            }, 500);
           }
-
         });
 
         $(".choice1").hover(function () {
@@ -103,7 +115,6 @@
           document.getElementById("open").play();
           $(".background").hide();
           if (sessionStorage.getItem("goodCounter") >= 4) {
-            // good ending 
             setTimeout(function () {
               document.getElementById("door").play();
               $(".atTheDoor, .endDoorHandle").hide();
@@ -121,9 +132,9 @@
               $(".dialogue").html("you...");
               $(".dialogueBox").css("pointer-events", "auto");
             }, 6000);
-          } else
-          // bad ending 
-          {
+          }
+          // bad ending
+          else {
             setTimeout(function () {
               document.getElementById("door").play();
               $(".atTheDoor, .endDoorHandle").hide();
@@ -204,6 +215,7 @@
             $(".arrow").toggleClass("arrow2");
           })
           .click(function () {
+            console.log("click");
             $(".background").fadeOut(3000);
             document.getElementById("footsteps").play();
             setTimeout(function () {
@@ -259,19 +271,22 @@
     </audio>
 
     <audio id="scream">
-      <source src='sound/scream.mp3' />
+      <source src="sound/scream.mp3" />
     </audio>
 
     <audio id="heartbeat">
       <source src="sound/heartbeat.mp3" />
     </audio>
 
-    <audio id='theme'>
-      <source src='/sound/Tonight You Belong to Me - Creepy Version.mp3' />
+    <audio id="theme">
+      <source src="/sound/Tonight You Belong to Me - Creepy Version.mp3" />
     </audio>
 
+    <audio id="badEnd">
+      <source src="/sound/badEndTheme.mp3" />
+    </audio>
 
-    <!-- up to creating the good ending -->
+    <div class="finalCurtain"></div>
     <div class="background">
       <div class="cover"></div>
       <img class="figure" src="/images/lilgirlhappy.png" />
