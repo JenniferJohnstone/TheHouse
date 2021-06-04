@@ -1,0 +1,25 @@
+#blood{
+    width: 300px;
+    height: 200px;
+    top: 300px;
+}
+
+#poison {
+    left: 900px;
+    display: none;
+}
+
+#cell{
+    position: absolute;
+    left: 200px;
+    z-index: 0;
+    display: none;
+}
+
+.end{
+    color: red;
+    font-size: 50px;
+    position: absolute;
+    left: 400px;
+    display: none;
+}

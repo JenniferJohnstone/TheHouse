@@ -1,26 +1,57 @@
 <html>
   <head>
     <link rel="stylesheet" href="police.css" />
+    <link rel="stylesheet" href="prison.css" />
     <script src="./jquery-3.6.0.min.js"></script>
     <script>
       $(document).ready(function () {
         document.getElementById("theme").play();
-      });
 
       $(".monologue")
-        .fadeIn()
-        .html("When the police came they started asking questions...")
-        .delay(1000)
+        .fadeIn(2000)
+        .html("When the police came the girl's story changed.")
+        .delay(2000)
         .fadeOut();
-      setTimeout(function () {
-        $(".monologue")
-          .fadeIn()
-          .html(
-            "Apparently the woman who lived here had died of unnatural causes."
-          )
-          .delay(1000)
-          .fadeOut();
-      }, 3000);
+        setTimeout(function(){
+          $('.monologue').fadeIn(2000).css('left', '100px').html("Suddenly I wasn't a stranger who came to help...").delay(3000).fadeOut()
+
+            setTimeout(function(){
+              $('.monologue2').fadeIn(2000).css({left: '700px', color: 'red'}).html("...but her mother's killer who had come back to finish the job.").delay(2000).fadeOut()
+
+
+              setTimeout(function(){
+                $('.monologue').fadeIn(2000).css({left: '400px', width: '600px', top: '200px;'}).html("They found clues with my fingerprints on it all over the house").delay(5000).fadeOut()
+
+                $("#blood").fadeIn(3000).delay(2000).fadeOut()
+                setTimeout(function(){$("#poison").delay(2000).show().delay(1000).fadeOut() }, 3000)
+                setTimeout(function(){$("#key").show().delay(1000).fadeOut()}, 6000)                
+                
+                setTimeout(function(){ 
+                  $('.monologue').html('Now this is where I spend my days').fadeIn()
+                  document.getElementById('prison').play()
+                  $('#cell').fadeIn()
+
+                  setTimeout(function(){
+                    $('#cell, .monologue').fadeOut()
+                    $('.end').fadeIn(5000).delay(5000).fadeOut()
+
+                    setTimeout(function(){
+                      window.location = 'index.html'
+                    }, 15000)
+
+                  }, 5000)
+
+                }, 9000);
+              }, 4000)  
+
+
+            }, 3000)
+            
+        }, 5000)
+
+    });
+
+
     </script>
   </head>
 
@@ -28,6 +59,19 @@
     <audio id="theme">
       <source src="/sound/prison.mp3" />
     </audio>
+
+    <audio id="prison">
+      <source src="/sound/Prison Sound Effects.mp3" />
+    </audio>
     <h2 class="monologue"></h2>
+    <h2 class="monologue2"></h2>
+    <h1 class="end">The End.</h1>
+    <img id="diary" src="/images/diary/page1.png" />
+    <img id="blood" src="/images/blood in sink.jpg" />
+    <img id="poison" src="/images/jack.png" />
+    <img id="bedroom" src="/images/viewFromBedroomWindow.png" />
+    <img id="window" src="/images/houseAtDay.png" />
+    <img id="key" src="/images/key.png" />
+    <img id="cell" src="/images/pirson.jpg" />
   </body>
 </html>

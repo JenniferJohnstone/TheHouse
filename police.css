@@ -3,7 +3,7 @@ body {
   position: relative;
 }
 
-.monologue {
+.monologue, .monologue2 {
   position: absolute;
   color: white;
   text-align: center;
@@ -44,5 +44,9 @@ body {
   height: 500px;
   left: 300px;
   top: 100px;
+  display: none;
+}
+
+#key {
   display: none;
 }
