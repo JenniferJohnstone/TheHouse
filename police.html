@@ -1,0 +1,89 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="police.css" />
+    <script src="./jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        document.getElementById("siren").play();
+        setTimeout(function () {
+          document.getElementById("theme").play();
+          $(".monologue")
+            .html("The police came and found all the clues i'd seen...")
+            .fadeIn()
+            .delay(2000)
+            .fadeOut();
+          setTimeout(function () {
+            $(".monologue").html("The diary...").fadeIn().delay(1500).fadeOut();
+            $("#diary").css("left", "600px").fadeIn().delay(1500).fadeOut();
+            setTimeout(function () {
+              $(".monologue")
+                .html("the blood")
+                .css("left", "800px")
+                .fadeIn()
+                .delay(1500)
+                .fadeOut();
+              $("#blood").css("top", "100px").fadeIn().delay(1500).fadeOut();
+              setTimeout(function () {
+                $(".monologue")
+                  .html("the poison")
+                  .css("left", "400px")
+                  .fadeIn()
+                  .delay(1500)
+                  .fadeOut();
+                $("#poison")
+                  .css("left", "500px")
+                  .fadeIn()
+                  .delay(1500)
+                  .fadeOut();
+                setTimeout(function () {
+                  $(".monologue")
+                    .html("I never saw that girl again but I still wonder...")
+                    .fadeIn()
+                    .delay(3000)
+                    .fadeOut();
+                  setTimeout(function () {
+                    $("#bedroom, #window").fadeIn().delay(3000).fadeOut();
+                    $(".monologue")
+                      .html("Did I do the right thing?")
+                      .css({ left: "700px", color: "red", fontSize: "30px" })
+                      .fadeIn(3000)
+                      .delay(3000)
+                      .fadeOut();
+                    setTimeout(function () {
+                      $(".monologue")
+                        .html("The end")
+                        .css("font-size", "50px")
+                        .fadeIn()
+                        .delay(5000)
+                        .fadeOut();
+                      setTimeout(function () {
+                        window.location = "index.html";
+                      }, 8000);
+                    }, 8000);
+                  }, 4000);
+                }, 2500);
+              }, 2500);
+            }, 2500);
+          }, 3000);
+        }, 3000);
+      });
+    </script>
+  </head>
+
+  <body>
+    <audio id="theme">
+      <source src="/sound/policeEnding.mp3" />
+    </audio>
+
+    <audio id="siren">
+      <source src="/sound/ambulance.mp3" />
+    </audio>
+
+    <img id="diary" src="/images/diary/page1.png" />
+    <img id="blood" src="/images/blood in sink.jpg" />
+    <img id="poison" src="/images/jack.png" />
+    <img id="bedroom" src="/images/viewFromBedroomWindow.png" />
+    <img id="window" src="/images/houseAtDay.png" />
+    <h1 class="monologue"></h1>
+  </body>
+</html>

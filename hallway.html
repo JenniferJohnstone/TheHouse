@@ -107,11 +107,27 @@
           }, 2500);
         });
 
-        $(".choice2").hover(function () {
-          $(".dialogue").html(
-            "After everything I've seen in this house I know I'm way over my head. This girl is dangerous."
-          );
-        });
+        // Call the police endings
+        $(".choice2")
+          .hover(function () {
+            $(".dialogue").html(
+              "After everything I've seen in this house I know I'm way over my head. This girl is dangerous."
+            );
+          })
+          .click(function () {
+            $(".background").fadeOut(3000);
+
+            // all clues found ending
+            if (sessionStorage.getItem("cluesFound") == 3) {
+              setTimeout(function () {
+                window.location = "police.html";
+              }, 3000);
+            } else {
+              setTimeout(function () {
+                window.location = "prison.html";
+              }, 3000);
+            }
+          });
 
         $(".endDoorHandle").click(function () {
           document.getElementById("endOftheHall").pause();

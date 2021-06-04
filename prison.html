@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="police.css" />
+    <script src="./jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        document.getElementById("theme").play();
+      });
+
+      $(".monologue")
+        .fadeIn()
+        .html("When the police came they started asking questions...")
+        .delay(1000)
+        .fadeOut();
+      setTimeout(function () {
+        $(".monologue")
+          .fadeIn()
+          .html(
+            "Apparently the woman who lived here had died of unnatural causes."
+          )
+          .delay(1000)
+          .fadeOut();
+      }, 3000);
+    </script>
+  </head>
+
+  <body>
+    <audio id="theme">
+      <source src="/sound/prison.mp3" />
+    </audio>
+    <h2 class="monologue"></h2>
+  </body>
+</html>
