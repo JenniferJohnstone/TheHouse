@@ -81,6 +81,9 @@
                 setTimeout(function () {
                   $(".final").html("The End");
                   $(".final").fadeIn(6000).delay(3000).fadeOut(2000);
+                  setTimeout(function () {
+                    window.location = "index.html";
+                  }, 40000);
                 }, 4000);
               }, 2000);
             }, 500);

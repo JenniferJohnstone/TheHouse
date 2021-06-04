@@ -19,6 +19,7 @@
           if (dialogueProgress == 1) {
             $(".dialogue").hide();
             $(".reminder").show().html("Search the room");
+            $(".dialogueBox").css("pointer-events", "none");
           }
           if (dialogueProgress == 2) {
             $(".dialogue").html("What verse should I read?");
@@ -88,6 +89,7 @@
           $(".dialogue").html(
             "Cast all your anxiety on him because he cares for you. "
           );
+          $(".dialogueBox").css("pointer-events", "auto");
         });
 
         $(".choice2").click(function () {
@@ -95,12 +97,14 @@
           $(".dialogue").html(
             "but those who hope in the LORD will renew their strength. They will soar on wings like eagles; they will run and not grow weary, they will walk and not be faint.  "
           );
+          $(".dialogueBox").css("pointer-events", "auto");
         });
         $(".choice3").click(function () {
           hideVerses();
           $(".dialogue").html(
             "He replied, “Because you have so little faith. Truly I tell you, if you have faith as small as a mustard seed, you can say to this mountain, ‘Move from here to there,’ and it will move. Nothing will be impossible for you.” "
           );
+          $(".dialogueBox").css("pointer-events", "auto");
         });
         $(".choice4").click(function () {
           hideVerses();
